@@ -39,12 +39,22 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
 // map.doubleClickZoom.disable();
 
-L.geoJson(bars).addTo(map);
-L.geoJson(bars, {
+// L.geoJson(bars).addTo(map);
+
+// set barPoints to a our coffeeShop GeoJSON
+var barPoints = L.geoJson(bars, {
     onEachFeature: function (feature, layer) {
         layer.bindPopup(feature.properties.name);
     }
-}).addTo(map);
+});
+
+// add coffee shops function
+function addBars() {
+    barPoints.addTo(map);
+};
+
+// Create event listener for the Add Coffee Shops Button
+document.getElementById("addButton").addEventListener("click", addBars);
 
 lyn65.bindPopup('<h3><a href="http://lyn65.com">Lyn 65</a></h3>');
 
