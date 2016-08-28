@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="leafletApp">
 
 <head>
     <title>Leaflet Map</title>
     <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
-    <script src="/vendor/jquery.min.js"></script>
+    <script src="/vendor/angular.min.js"></script>
     <script src="/vendor/leaflet/leaflet.js"></script>
+    <script src="/vendor/angular-leaflet-directive.js"></script>
     <script src="/scripts/client-app.js"></script>
-    <script>
-    </script>
 </head>
 
-<body>
-    <div id="map" style="width: 705px; height: 375px"></div>
+<body ng-controller="leafletController">
+    <leaflet></leaflet>
+
     <div id="controls" style="margin: 15px;">
         <button id="addButton">Show All Bars and Coffee Shops</button>
         <button id="removeButton">Hide All Bars and Coffee Shops</button>
