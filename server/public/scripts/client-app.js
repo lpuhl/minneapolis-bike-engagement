@@ -10,15 +10,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 var bikewaysLayer = new L.GeoJSON.AJAX("../../data/bikeways_lines.geojson");
 bikewaysLayer.addTo(mymap);
 
-// L.geoJson(bikewaysLayer, {
-//     style: function(feature) {
-//         switch (feature.properties.cycleway) {
-//             case 'shared_lane': return {color: "#ff0000"};
-//             case 'lane':   return {color: "#0000ff"};
-//         }
-//     }
-// }).addTo(mymap);
-
+console.log(bikewaysLayer);
 
 var lyn65 = L.marker([44.885933,-93.286542]).addTo(mymap);
 lyn65.bindPopup('<h3><a href="http://lyn65.com">Lyn 65</a></h3>');
