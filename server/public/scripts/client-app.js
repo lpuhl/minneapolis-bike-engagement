@@ -1,4 +1,4 @@
-var mymap = L.map("mapid").setView([44.97, -93.25], 12);
+var mymap = L.map("bikemap").setView([44.97, -93.25], 12);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -7,10 +7,19 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1IjoiZWxpemFiZXRoIiwiYSI6IkNmdnB1cmMifQ.NlNxa3kOsDxhWJVGxZsPGg'
 }).addTo(mymap);
 
-var geojsonLayer = new L.GeoJSON.AJAX("../../data/bikeways_lines.geojson");
-geojsonLayer.addTo(mymap);
+var bikewaysLayer = new L.GeoJSON.AJAX("../../data/bikeways_lines.geojson");
+bikewaysLayer.addTo(mymap);
 
-//
+// L.geoJson(bikewaysLayer, {
+//     style: function(feature) {
+//         switch (feature.properties.cycleway) {
+//             case 'shared_lane': return {color: "#ff0000"};
+//             case 'lane':   return {color: "#0000ff"};
+//         }
+//     }
+// }).addTo(mymap);
+
+
 var lyn65 = L.marker([44.885933,-93.286542]).addTo(mymap);
 lyn65.bindPopup('<h3><a href="http://lyn65.com">Lyn 65</a></h3>');
 
