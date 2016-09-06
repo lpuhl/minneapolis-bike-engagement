@@ -1,1 +1,10 @@
 #bikemap { height: 600px; }
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 50%;
+}
+  

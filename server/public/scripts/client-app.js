@@ -15,6 +15,10 @@ console.log(bikewaysLayer);
 var lyn65 = L.marker([44.885933,-93.286542]).addTo(mymap);
 lyn65.bindPopup('<h3><a href="http://lyn65.com">Lyn 65</a></h3>');
 
+var mplsBikeCoal = L.marker([44.9733, -93.2478]).addTo(mymap);
+mplsBikeCoal.bindPopup('<h3><a href="http://www.mplsbike.org/">Minneapolis Bicycle Coalition</a></h3><img src="./images/MBC-logo-square-white-bg_bigger.jpg" />');
+
+
 var lineToCoop = L.polyline([[44.885713, -93.286768], [44.886533,  -93.287808]],
     {color: 'red', weight: 10}).addTo(mymap);
 //
