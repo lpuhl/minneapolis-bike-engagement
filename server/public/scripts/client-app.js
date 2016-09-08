@@ -1,14 +1,17 @@
-var mymap = L.map("bikemap").setView([44.97, -93.25], 12);
 
+// create a map in the "bikemap" div, set the view to a given place and zoom
+L.map("bikemap", {drawControl: true}).setView([44.97, -93.25], 12);
+
+// add a MapBox/OSM tile layer
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiZWxpemFiZXRoIiwiYSI6IkNmdnB1cmMifQ.NlNxa3kOsDxhWJVGxZsPGg'
-}).addTo(mymap);
+}).addTo(bikemap);
 
-var bikewaysLayer = new L.GeoJSON.AJAX("../../data/bikeways_lines.geojson");
-bikewaysLayer.addTo(mymap);
+// var bikewaysLayer = new L.GeoJSON.AJAX("../../data/bikeways_lines.geojson");
+// bikewaysLayer.addTo(mymap);
 
 console.log(bikewaysLayer);
 

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html >
 <head>
-    <title>Leaflet Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+    <title>Minneapolis Bikeways Wish Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
+    <link rel="stylesheet" href="./vendor/leaflet.draw.css" />
     <link rel="stylesheet" href="./styles/styles.css" />
-    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-    <script type="text/javascript" src= "https://cdn.rawgit.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script>
+    <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
+    <script src="./vendor/leaflet.draw.js"></script>
+
+    <!-- <script type="text/javascript" src= "https://cdn.rawgit.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script> -->
     <!-- <script src="./vendor/angular.min.js"></script> -->
     <!-- <script src="./vendor/angular-leaflet-directive.js"></script> -->
 </head>
 
 <body >
   <!-- <leaflet></leaflet> -->
-    <h1>Minneapolis Bikeways</h1>
+    <!-- <header ng-include="'/views/templates/header.html'">   -->
+    <!-- </header> -->
     <div id="bikemap">
     </div>
-    <div id="controls" style="margin: 15px;">
-        <button id="addButton">Show All Bars and Coffee Shops</button>
-      <button id="removeButton">Hide All Bars and Coffee Shops</button>
-        <button id="toggleButton">Toggle All Bars and Coffee Shops</button>
+    <div>
+      <a class="text-link" href="#admin">
+        Admin Login
+      </a>
     </div>
   <script src="./scripts/client-app.js"></script>
 </body>
