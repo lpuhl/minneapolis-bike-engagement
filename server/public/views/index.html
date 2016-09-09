@@ -1,30 +1,190 @@
 <!DOCTYPE html>
-<html >
-<head>
-    <title>Minneapolis Bikeways Wish Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
-    <link rel="stylesheet" href="./vendor/leaflet.draw.css" />
-    <link rel="stylesheet" href="./styles/styles.css" />
-    <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
-    <script src="./vendor/leaflet.draw.js"></script>
+<html>
 
-    <!-- <script type="text/javascript" src= "https://cdn.rawgit.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script> -->
-    <!-- <script src="./vendor/angular.min.js"></script> -->
-    <!-- <script src="./vendor/angular-leaflet-directive.js"></script> -->
+<head>
+    <title>Minneapolis Bicycle Wish-Map</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css" />
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
 </head>
 
-<body >
-  <!-- <leaflet></leaflet> -->
-    <!-- <header ng-include="'/views/templates/header.html'">   -->
-    <!-- </header> -->
-    <div id="bikemap">
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <h1>Minneapolis Bicycle Wish Map</h1>
+        </div>
+        <div id="map"></div>
+        <div id="controls">
+            <p>Click points for more information, or add your own.</br>
+            </p>
+            <input type="button" onclick="startEdits()" value="Click to Start Editing">
+            <input type="button" onclick="stopEdits()" value="Stop Your Editing Session"><br>
+            <div id="credits">
+                <p>#webMapWorkshop - &copy;2015, Mike Foster</p>
+            </div>
+        </div>
     </div>
-    <div>
-      <a class="text-link" href="#admin">
-        Admin Login
-      </a>
+
+    <div id="dialog" title="Point Information">
+      <form>
+        <fieldset style="border: none;">
+          <ul style="list-style-type: none; padding-left: 0px">
+            <li><label for="username">Your Name</label></li>
+            <li><input type="text" name="username" id="username" placeholder="Enter your name" class="text ui-widget-content ui-corner-all"></li>
+            <li><label for="description">About this Point</label></li>
+            <li><input type="text" name="description" id="description" placeholder="Description for this point" class="text ui-widget-content ui-corner-all"></li>
+          </ul>
+          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+      </form>
     </div>
-  <script src="./scripts/client-app.js"></script>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://leaflet.github.io/Leaflet.draw/leaflet.draw.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        // Create Leaflet map object
+        var bikemap = L.map('map', {
+            center: [44.9766, -93.2655],
+            zoom: 15
+        });
+
+        // Add tile layer basemap
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiZWxpemFiZXRoIiwiYSI6IkNmdnB1cmMifQ.NlNxa3kOsDxhWJVGxZsPGg'
+        }).addTo(bikemap);
+
+        // Initialise the FeatureGroup to store drawn layers
+        var drawnItems = new L.FeatureGroup();
+
+        // Create Leaflet Draw Control for the draw tools and toolbox
+        var drawControl = new L.Control.Draw({
+            draw: {
+                polygon: false,
+                polyline: true,
+                rectangle: false,
+                circle: false
+            },
+            edit: {
+              featureGroup: drawnItems
+            },
+            remove: false
+        });
+        bikemap.addControl(drawControl);
+
+        // Function to run when feature is drawn on map
+        bikemap.on('draw:created', function (e){
+          var layer = e.layer;
+          drawnItems.addLayer(layer);
+          bikemap.addLayer(drawnItems);
+          // dialog.dialog("open");
+        });
+
+        // // Add Data from CartoDB using the SQL API
+        // // Declare Variables
+        // // Create Global Variable to hold CartoDB points
+        // var cartoDBPoints = null;
+        //
+        // // Set your CartoDB Username
+        // var cartoDBusername = "lizzz";
+        //
+        // // Write SQL Selection Query to be Used on CartoDB Table
+        // // Name of table is 'data_collector'
+        // var sqlQuery = "SELECT * FROM data_collector";
+        //
+        // // Get CartoDB selection as GeoJSON and Add to Map
+        // function getGeoJSON() {
+        //     $.getJSON("https://" + cartoDBusername + ".cartodb.com/api/v2/sql?format=GeoJSON&q=" + sqlQuery, function(data) {
+        //         cartoDBPoints = L.geoJson(data, {
+        //             pointToLayer: function(feature, latlng) {
+        //                 var marker = L.marker(latlng);
+        //                 marker.bindPopup('' + feature.properties.description + 'Submitted by ' + feature.properties.name + '');
+        //                 return marker;
+        //             }
+        //         }).addTo(bikemap);
+        //     });
+        // };
+        //
+        // // Run showAll function automatically when document loads
+        // $(document).ready(function() {
+        //     getGeoJSON();
+        // });
+
+
+
+      //   // Boolean global variable used to control visibility
+      //   var controlOnMap = false;
+      //   // Create variable for Leaflet.draw features
+      //   var drawnItems = new L.FeatureGroup();
+      //
+      //   // Function to add the draw control to the map to start editing
+      //   function startEdits(){
+      //     if(controlOnMap == true){
+      //       bikemap.removeControl(drawControl);
+      //       controlOnMap = false;
+      //     }
+      //     bikemap.addControl(drawControl);
+      //     controlOnMap = true;
+      //   }
+      //   // Function to remove the draw control from the map
+      //   function stopEdits(){
+      //     bikemap.removeControl(drawControl);
+      //     controlOnMap = false;
+      //   }
+      //
+      //
+      // // Use the jQuery UI dialog to create a dialog and set options
+      // var dialog = $("#dialog").dialog({
+      //   autoOpen: false,
+      //   height: 300,
+      //   width: 350,
+      //   modal: true,
+      //   position: {
+      //     my: "center center",
+      //     at: "center center",
+      //     of: "#map"
+      //   },
+      //   buttons: {
+      //     "Add to Database": setData,
+      //     Cancel: function() {
+      //       dialog.dialog("close");
+      //       bikemap.removeLayer(drawnItems);
+      //     }
+      //   },
+      //   close: function() {
+      //     form[0].reset();
+      //     console.log("Dialog closed");
+      //   }
+      // });
+      //
+      // // Stops default form submission and ensures that setData or the cancel function run
+      // var form = dialog.find("form").on("submit", function(event) {
+      //   event.preventDefault();
+      // });
+      //
+      // function setData() {
+      //   var enteredUsername = username.value;
+      //   var enteredDescription = description.value;
+      //   drawnItems.eachLayer(function (layer) {
+      //     var sql = "INSERT INTO data_collector (the_geom, description, name, latitude, longitude) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('";
+      //     var a = layer.getLatLng();
+      //     var sql2 = '{"type":"Point","coordinates":[' + a.lng + "," + a.lat + "]}'),4326),'" + enteredDescription + "','" + enteredUsername + "','" + a.lat + "','" + a.lng + "')";
+      //     var pURL = sql + sql2;
+      //     submitToProxy(pURL);
+      //     console.log("Feature has been submitted to the Proxy");
+      //   });
+      //   bikemap.removeLayer(drawnItems);
+      //   drawnItems = new L.FeatureGroup();
+      //   console.log("drawnItems has been cleared");
+      //   dialog.dialog("close");
+      // };
+
+    </script>
 </body>
 
 </html>
