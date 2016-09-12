@@ -2,19 +2,26 @@
 <html>
 <head>
     <title>Minneapolis Bicycle Wish Map</title>
+
+    <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css" />
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
-    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
+
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://leaflet.github.io/Leaflet.draw/leaflet.draw.js"></script>
+    <script src="./vendor/jquery.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="./vendor/angular.min.js"></script>
     <script src="./vendor/angular-route.min.js"></script>
     <script src="./vendor/angular-simple-logger.min.js"></script>
     <script src="./vendor/ui-leaflet.min.js"></script>
+    <script src="./vendor/ui-leaflet-draw.js"></script>
 
     <script src="./scripts/client-config.js"></script>
 
     <script type="text/javascript" src="./scripts/controllers/mapController.js"></script>
+    <script type="text/javascript" src="./scripts/controllers/adminController.js"></script>
 </head>
 
 <body ng-app="myApp">
@@ -23,16 +30,13 @@
             <h1>Minneapolis Bicycle Wish Map</h1>
         </div>
         <main ng-view></main>
-        <!-- <div id="map"></div> -->
-        <!-- <div id="controls">
-            <p>Click points for more information, or add your own.</br>
-            </p>
-            <input type="button" onclick="startEdits()" value="Click to Start Editing">
-            <input type="button" onclick="stopEdits()" value="Stop Your Editing Session"><br>
-        </div>
     </div>
+    <footer>
+      <a href="#admin-view">Admin login</a>
+    </footer>
 
-    <div id="dialog" title="Point Information">
+
+    <!-- <div id="dialog" title="Point Information">
       <form>
         <fieldset style="border: none;">
           <ul style="list-style-type: none; padding-left: 0px">
@@ -44,14 +48,8 @@
           <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
         </fieldset>
       </form>
-    </div>
+    </div> -->
 
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="http://leaflet.github.io/Leaflet.draw/leaflet.draw.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
-
-    <!-- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> -->
 
 </body>
-
 </html>

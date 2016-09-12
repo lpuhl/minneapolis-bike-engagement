@@ -6,10 +6,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: '/views/partials/home-map.html',
       controller: "mapController"
     })
-    // .when('/faves', {
-    //   templateUrl: '/views/partials/faves.html',
-    //   controller: "favesController"
-    // })
+    .when('/admin-view', {
+      templateUrl: '/views/partials/admin-view.html',
+      controller: "adminController"
+    })
     .otherwise({
       redirectTo: '/home'
     })

@@ -1,7 +1,12 @@
-myApp.controller("mapController", ["$scope", "$http", function($scope, $http) {
+// 'use strict';
+myApp.controller("mapController", function($scope, leafletDrawEvents) {
   console.log("map controller working!");
 
+  // Initialise the FeatureGroup to store drawn layers
+  var drawnItems = new L.FeatureGroup();
+
   angular.extend($scope, {
+    map: {
       minneapolis: {
         lat: 44.9766,
         lng: -93.2655,
@@ -10,44 +15,96 @@ myApp.controller("mapController", ["$scope", "$http", function($scope, $http) {
       layers: {
         baselayers: {
           mapbox_streets: {
-            name: 'Mapbox Streets',
+            name: 'Map View',
             url: 'https://api.tiles.mapbox.com/v4/{mapid}/{z}/{x}/{y}.png?access_token={apikey}',
             type: 'xyz',
             layerOptions: {
               apikey: 'pk.eyJ1IjoiZWxpemFiZXRoIiwiYSI6IkNmdnB1cmMifQ.NlNxa3kOsDxhWJVGxZsPGg',
-              mapid: 'mapbox.streets'
+              mapid: 'mapbox.streets',
+              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
+            }
+          },
+          mapbox_hybrid: {
+            name: 'Satellite/Streets View',
+            url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZWxpemFiZXRoIiwiYSI6IkNmdnB1cmMifQ.NlNxa3kOsDxhWJVGxZsPGg',
+            type: 'xyz',
+            layerOptions: {
+              // apikey: 'pk.eyJ1IjoiZWxpemFiZXRoIiwiYSI6IkNmdnB1cmMifQ.NlNxa3kOsDxhWJVGxZsPGg',
+              mapid: 'mapbox.satellite',
+              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
             }
           }
         }
       },
       defaults: {
-          maxZoom: 14,
-
+          minZoom: 12,
           path: {
               weight: 10,
               color: '#800000',
               opacity: 1
           }
+      },
+      drawOptions: {
+        position: "bottomright",
+        draw: {
+          polyline: {
+            metric: false
+          },
+          polygon: false,
+          rectangle: false,
+          circle: false,
+          marker: true
+        },
+        edit: {
+        featureGroup: drawnItems,
+        remove: true
+        }
       }
+    }
   });
 
-  // Create Leaflet map object
-  // var bikemap = L.map('map', {
-  //     center: [44.9766, -93.2655],
-  //     zoom: 15
-  // });
+  var handle = {
+  created: function(e,leafletEvent, leafletObject, model, modelName) {
+    // Add newly-drawn feature to leafletEvent layer
+    drawnItems.addLayer(leafletEvent.layer);
+    var shape = drawnItems.toGeoJSON();
+    var shape_for_db = JSON.stringify(shape);
+    $('#formModal').modal();
+    console.log(shape)
+  },
+  edited: function(arg) {},
+  deleted: function(arg) {
+    var layers;
+    layers = arg.layers;
+    drawnItems.removeLayer(layer);
+  },
+  drawstart: function(arg) {},
+  drawstop: function(arg) {
+    //  dialog.dialog("open");
+  },
+  editstart: function(arg) {},
+  editstop: function(arg) {},
+  deletestart: function(arg) {},
+  deletestop: function(arg) {}
+  };
 
-  // Add tile layer basemap
-  // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-  //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-  //     maxZoom: 18,
-  //     id: 'mapbox.streets',
-  //     accessToken: 'pk.eyJ1IjoiZWxpemFiZXRoIiwiYSI6IkNmdnB1cmMifQ.NlNxa3kOsDxhWJVGxZsPGg'
-  // }).addTo(bikemap);
-  //
-  // // Initialise the FeatureGroup to store drawn layers
-  // var drawnItems = new L.FeatureGroup();
-  //
+  var drawEvents = leafletDrawEvents.getAvailableEvents();
+
+  drawEvents.forEach(function(eventName){
+      $scope.$on('leafletDirectiveDraw.' + eventName, function(e, payload) {
+        //{leafletEvent, leafletObject, model, modelName} = payload
+        var leafletEvent, leafletObject, model, modelName; //destructuring not supported by chrome yet :(
+        leafletEvent = payload.leafletEvent,
+        leafletObject = payload.leafletObject,
+        model = payload.model,
+        modelName = payload.modelName;
+        handle[eventName.replace('draw:','')](e,leafletEvent, leafletObject, model, modelName);
+      });
+  });
+
+
+});
+
   // // Create Leaflet Draw Control for the draw tools and toolbox
   // var drawControl = new L.Control.Draw({
   //     draw: {
@@ -71,7 +128,6 @@ myApp.controller("mapController", ["$scope", "$http", function($scope, $http) {
   //   // dialog.dialog("open");
   // });
 
-}]);
 
 
 
