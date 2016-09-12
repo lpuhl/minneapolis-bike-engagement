@@ -1,5 +1,5 @@
 // 'use strict';
-myApp.controller("mapController", function($scope, leafletDrawEvents) {
+myApp.controller("mapController", ['$scope', '$http', 'leafletDrawEvents', function($scope, $http, leafletDrawEvents) {
   console.log("map controller working!");
 
   // Initialise the FeatureGroup to store drawn layers
@@ -99,11 +99,42 @@ myApp.controller("mapController", function($scope, leafletDrawEvents) {
         model = payload.model,
         modelName = payload.modelName;
         handle[eventName.replace('draw:','')](e,leafletEvent, leafletObject, model, modelName);
+        console.log(leafletObject);
+
       });
   });
 
+  $scope.saveComment = function() {
+      console.log($scope.comment);
+      var comment = $scope.comment;
+      var newComment = {
+          comment: comment.substring(0,199),
+          first_name: $scope.first_name,
+          last_name: $scope.last_name,
+          address: $scope.address,
+          city: $scope.city,
+          zip: $scope.zip,
+          phone: $scope.phone,
+          email: $scope.email,
+          list: $scope.list
+      };
 
-});
+      console.log(newComment);
+
+      $http({
+          method: "POST",
+          url: '/newcomment',
+          data: newComment,
+      }).then(function() {
+          console.log("Comment saved");
+      }, function() {
+          console.log("Ugh, this sucks.");
+      });
+  }
+
+
+
+}]);
 
   // // Create Leaflet Draw Control for the draw tools and toolbox
   // var drawControl = new L.Control.Draw({

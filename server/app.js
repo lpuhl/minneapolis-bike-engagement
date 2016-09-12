@@ -5,10 +5,10 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 /** ---------- OUR MODULES ---------- **/
-var bikemap = require('./routes/maproute');
+var formInput = require('./routes/newcomment');
 
 /** ---------- EXPRESS ROUTES ---------- **/
-app.use('/maproute', bikemap);
+app.use('/newcomment', formInput);
 
 app.get('/*', function(req, res) {
   var file = req.params[0] || '/views/index.html';

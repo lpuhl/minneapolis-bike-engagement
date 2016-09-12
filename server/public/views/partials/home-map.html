@@ -30,12 +30,12 @@
 
             <label for="email">email</label>
             <input ng-model="email" type="text" id="email" name="email" />
-            <label for="email_list">Yes, please keep me in the loop!</label>
-            <input type="checkbox" ng-model="email_list" id="email_list" name="email_list"/>
+            <label for="list">Yes, please keep me in the loop!</label>
+            <input type="checkbox" ng-model="list" id="list" name="list"/>
       </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button ng-click="addComment()" type="button" class="btn btn-primary">Save</button>
+        <button ng-click="saveComment()" type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>
