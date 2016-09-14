@@ -1,9 +1,34 @@
-myApp.factory('DataFactory', [function() {
+myApp.factory('DataFactory', ['$http', function($http) {
   console.log("data factory running");
 
+  var newFeature;
+
+  var intakeDrawnItem = function(item) {
+    console.log('intakeDrawnItem function running');
+    newFeature = item;
+    console.log('new feature in factory: ', newFeature);
+  };
+
+  var saveNewRecord = function(newComment) {
+    console.log('newComment in saveNewRecord function: ', newComment);
+    console.log('newFeature in saveNewRecord function :', newFeature);
+    console.log('newFeature.features.geometry in saveNewRecord function :', newFeature);
+
+    $http.post('/newcomment', newComment)
+      .then(function(response) {
+        console.log("post response: ", response);
+        if(response.status == 201) {
+          console.log("saveNewRecord successful");
+        } else {
+          console.log("error posting new comment");
+        }
+      });
+
+  };
 
 
-  // drawnItems.eachLayer(function (layer) {
+
+  // newFeatures.eachLayer(function (layer) {
   //   //Convert the drawing to a GeoJSON to pass to the CartoDB sql database
   //   var drawing = "'"+JSON.stringify(layer.toGeoJSON().geometry)+"'";
   //   console.log(drawing);
@@ -13,16 +38,18 @@ myApp.factory('DataFactory', [function() {
 
 
   return {
-    // shape_for_db: shape_for_db;
 
-    // currentColour: function() {
-    //   console.log('currentColour running from factory:', currentColor);
-    //   return currentColor;
-    // },
-    // addColour: function(newcolor) {
-    //   console.log('addColour running from factory');
-    //   return addColor(newcolor);
+    saveDrawnItem: function(drawing) {
+      // console.log('saveDrawnItem running from factory:');
+      return intakeDrawnItem(drawing);
+    },
+    saveNewComment: function(newComment) {
+      return saveNewRecord(newComment);
+      // console.log('newComment from factory: ', newComment);
+    },
+    getDrawnItem: function() {
+      return newFeature;
     }
-
+  }
 
 }]);

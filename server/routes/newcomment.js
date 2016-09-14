@@ -3,30 +3,33 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/bikeways';
 
- // routes
+// routes
 router.post('/', function(req, res) {
-  var contact = req.body;
-  console.log(contact);
+  console.log(req.body);
+  var record = req.body;
+  console.log(record);
   // Store in DB
-  // pg.connect(connectionString, function(err, client, done) {
-  //   if(err) {
-  //     // console.log(err);
-  //     res.sendStatus(500);
-  //   }
-  //   client.query('INSERT INTO contacts (firstname, lastname, street, city, zip, phone, email, list, comment) ' +
-  //                'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-  //     [contact.first_name, contact.last_name, contact.address, contact.city, contact.zip, contact.phone, contact.email, contact.list, contact.comment],
-  //     function(err, result) {
-  //       done();
-  //       if(err) {
-  //         console.log("query error: ", err);
-  //         res.sendStatus(500);
-  //       }
-  //       // created!
-  //       res.sendStatus(201);
-  //     });
-  // });
+  pg.connect(connectionString, function(err, client, done) {
+    if(err) {
+      // console.log(err);
+      res.sendStatus(500);
+    }
+    client.query('INSERT INTO bikemap (firstname, lastname, street, city, state, zip, phone, email, list, comment) ' +
+                 'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
+      [record.first_name, record.last_name, record.street, record.city, record.state, record.zip, record.phone, record.email, record.list, record.comment],
+      function(err, result) {
+        done();
+        if(err) {
+          console.log("query error: ", err);
+          res.sendStatus(500);
+        }
+        // created!
+        res.sendStatus(201);
+      });
+  });
 });
+
+module.exports = router;
 
 //   router.get('/', function(req, res) {
 //   pg.connect(connectionString, function(err, client, done) {
@@ -51,7 +54,6 @@ router.post('/', function(req, res) {
 //   });
 // });
 
-module.exports = router;
 
 //
 // router.put('/:id', function(req, res) {

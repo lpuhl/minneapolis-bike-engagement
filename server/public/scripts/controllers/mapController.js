@@ -64,15 +64,18 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
     }
   });
 
+// from github.com/angular-ui/ui-leaflet-draw/blob/master/index.html
   var handle = {
     created: function(e,leafletEvent, leafletObject, model, modelName) {
       // Add newly-drawn feature to leafletEvent layer
       console.log("created");
       drawnItems.addLayer(leafletEvent.layer);
-      var shape = drawnItems.toGeoJSON();
-      var shape_for_db = JSON.stringify(shape);
-      console.log(shape);
+      console.log("drawnItems: ", drawnItems);
+      var drawing = JSON.stringify(drawnItems.toGeoJSON());
+      // var drawing = "'"+JSON.stringify(drawnItems.toGeoJSON().geometry)+"'";
+      console.log("Drawing: ", drawing);
 
+      $scope.dataFactory.saveDrawnItem(drawing);
       $uibModal.open({
         templateUrl: '/views/partials/inputForm.html',
         controller: 'InputController'
@@ -105,7 +108,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
         model = payload.model,
         modelName = payload.modelName;
         handle[eventName.replace('draw:','')](e,leafletEvent, leafletObject, model, modelName);
-        console.log(leafletObject);
+        // console.log(e);
       });
   });
 

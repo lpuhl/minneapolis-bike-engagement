@@ -1,5 +1,7 @@
-myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalInstance', function ($scope, $http, $uibModal, $uibModalInstance) {
+myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalInstance', 'DataFactory', function ($scope, $http, $uibModal, $uibModalInstance, DataFactory) {
   console.log("input controller working!");
+
+  $scope.dataFactory = DataFactory;
 
   $scope.cancelForm = function () {
     $uibModalInstance.dismiss();
@@ -19,26 +21,13 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
           email: $scope.email,
           list: $scope.list
       };
-      console.log(newComment);
+      $scope.dataFactory.saveNewComment(newComment);
+      // var test = $scope.dataFactory.getDrawnItem();
 
       // close modal window
       $uibModalInstance.close();
 
-      /// get geometry data from factory
-
       /// run factory function that will remove drawnItems layer from map and reset it
-
-
-      $http({
-          method: "POST",
-          url: '/newcomment',
-          data: newComment,
-      }).then(function() {
-          console.log("Comment saved");
-      }, function() {
-          console.log("Ugh, this sucks.");
-      });
-
   }
 
 
