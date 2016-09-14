@@ -1,6 +1,7 @@
 // 'use strict';
-myApp.controller("mapController", ['$scope', '$http', 'leafletDrawEvents', function($scope, $http, leafletDrawEvents) {
+myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leafletData', '$uibModal', 'DataFactory', function ($scope, $http, leafletDrawEvents, leafletData, $uibModal, DataFactory){
   console.log("map controller working!");
+  $scope.dataFactory = DataFactory;
 
   // Initialise the FeatureGroup to store drawn layers
   var drawnItems = new L.FeatureGroup();
@@ -64,28 +65,33 @@ myApp.controller("mapController", ['$scope', '$http', 'leafletDrawEvents', funct
   });
 
   var handle = {
-  created: function(e,leafletEvent, leafletObject, model, modelName) {
-    // Add newly-drawn feature to leafletEvent layer
-    drawnItems.addLayer(leafletEvent.layer);
-    var shape = drawnItems.toGeoJSON();
-    var shape_for_db = JSON.stringify(shape);
-    $('#formModal').modal();
-    console.log(shape)
-  },
-  edited: function(arg) {},
-  deleted: function(arg) {
-    var layers;
-    layers = arg.layers;
-    drawnItems.removeLayer(layer);
-  },
-  drawstart: function(arg) {},
-  drawstop: function(arg) {
-    //  dialog.dialog("open");
-  },
-  editstart: function(arg) {},
-  editstop: function(arg) {},
-  deletestart: function(arg) {},
-  deletestop: function(arg) {}
+    created: function(e,leafletEvent, leafletObject, model, modelName) {
+      // Add newly-drawn feature to leafletEvent layer
+      console.log("created");
+      drawnItems.addLayer(leafletEvent.layer);
+      var shape = drawnItems.toGeoJSON();
+      var shape_for_db = JSON.stringify(shape);
+      console.log(shape);
+
+      $uibModal.open({
+        templateUrl: '/views/partials/inputForm.html',
+        controller: 'InputController'
+      });
+    },
+    edited: function(arg) {},
+    deleted: function(arg) {
+      var layers;
+      layers = arg.layers;
+      drawnItems.removeLayer(layer);
+    },
+    drawstart: function(arg) {},
+    drawstop: function(arg) {
+      //  dialog.dialog("open");
+    },
+    editstart: function(arg) {},
+    editstop: function(arg) {},
+    deletestart: function(arg) {},
+    deletestop: function(arg) {}
   };
 
   var drawEvents = leafletDrawEvents.getAvailableEvents();
@@ -100,67 +106,10 @@ myApp.controller("mapController", ['$scope', '$http', 'leafletDrawEvents', funct
         modelName = payload.modelName;
         handle[eventName.replace('draw:','')](e,leafletEvent, leafletObject, model, modelName);
         console.log(leafletObject);
-
       });
   });
 
-  $scope.saveComment = function() {
-      console.log($scope.comment);
-      var comment = $scope.comment;
-      var newComment = {
-          comment: comment.substring(0,199),
-          first_name: $scope.first_name,
-          last_name: $scope.last_name,
-          address: $scope.address,
-          city: $scope.city,
-          zip: $scope.zip,
-          phone: $scope.phone,
-          email: $scope.email,
-          list: $scope.list
-      };
-
-      console.log(newComment);
-
-      $http({
-          method: "POST",
-          url: '/newcomment',
-          data: newComment,
-      }).then(function() {
-          console.log("Comment saved");
-      }, function() {
-          console.log("Ugh, this sucks.");
-      });
-  }
-
-
-
 }]);
-
-  // // Create Leaflet Draw Control for the draw tools and toolbox
-  // var drawControl = new L.Control.Draw({
-  //     draw: {
-  //         polygon: false,
-  //         polyline: true,
-  //         rectangle: false,
-  //         circle: false
-  //     },
-  //     edit: {
-  //       featureGroup: drawnItems
-  //     },
-  //     remove: false
-  // });
-  // bikemap.addControl(drawControl);
-  //
-  // // Function to run when feature is drawn on map
-  // bikemap.on('draw:created', function (e){
-  //   var layer = e.layer;
-  //   drawnItems.addLayer(layer);
-  //   bikemap.addLayer(drawnItems);
-  //   // dialog.dialog("open");
-  // });
-
-
-
 
 // // Add Data from CartoDB using the SQL API
 // // Declare Variables
@@ -191,72 +140,3 @@ myApp.controller("mapController", ['$scope', '$http', 'leafletDrawEvents', funct
 // $(document).ready(function() {
 //     getGeoJSON();
 // });
-
-
-
-//   // Boolean global variable used to control visibility
-//   var controlOnMap = false;
-//   // Create variable for Leaflet.draw features
-//   var drawnItems = new L.FeatureGroup();
-//
-//   // Function to add the draw control to the map to start editing
-//   function startEdits(){
-//     if(controlOnMap == true){
-//       bikemap.removeControl(drawControl);
-//       controlOnMap = false;
-//     }
-//     bikemap.addControl(drawControl);
-//     controlOnMap = true;
-//   }
-//   // Function to remove the draw control from the map
-//   function stopEdits(){
-//     bikemap.removeControl(drawControl);
-//     controlOnMap = false;
-//   }
-//
-//
-// // Use the jQuery UI dialog to create a dialog and set options
-// var dialog = $("#dialog").dialog({
-//   autoOpen: false,
-//   height: 300,
-//   width: 350,
-//   modal: true,
-//   position: {
-//     my: "center center",
-//     at: "center center",
-//     of: "#map"
-//   },
-//   buttons: {
-//     "Add to Database": setData,
-//     Cancel: function() {
-//       dialog.dialog("close");
-//       bikemap.removeLayer(drawnItems);
-//     }
-//   },
-//   close: function() {
-//     form[0].reset();
-//     console.log("Dialog closed");
-//   }
-// });
-//
-// // Stops default form submission and ensures that setData or the cancel function run
-// var form = dialog.find("form").on("submit", function(event) {
-//   event.preventDefault();
-// });
-//
-// function setData() {
-//   var enteredUsername = username.value;
-//   var enteredDescription = description.value;
-//   drawnItems.eachLayer(function (layer) {
-//     var sql = "INSERT INTO data_collector (the_geom, description, name, latitude, longitude) VALUES (ST_SetSRID(ST_GeomFromGeoJSON('";
-//     var a = layer.getLatLng();
-//     var sql2 = '{"type":"Point","coordinates":[' + a.lng + "," + a.lat + "]}'),4326),'" + enteredDescription + "','" + enteredUsername + "','" + a.lat + "','" + a.lng + "')";
-//     var pURL = sql + sql2;
-//     submitToProxy(pURL);
-//     console.log("Feature has been submitted to the Proxy");
-//   });
-//   bikemap.removeLayer(drawnItems);
-//   drawnItems = new L.FeatureGroup();
-//   console.log("drawnItems has been cleared");
-//   dialog.dialog("close");
-// };

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'nemLogging', 'ui-leaflet']);
+var myApp = angular.module('myApp', ['ngRoute', 'nemLogging', 'ui-leaflet', 'ui.bootstrap']);
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
