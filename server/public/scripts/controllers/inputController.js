@@ -7,6 +7,7 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
     $uibModalInstance.dismiss();
   };
 
+
   // Saving new input from form and geometry
   $scope.saveComment = function() {
       // var comment = $scope.comment;

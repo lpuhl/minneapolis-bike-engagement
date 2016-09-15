@@ -56,6 +56,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
           circle: false,
           marker: true
         },
+        // Make the drawnItems layer editable
         edit: {
         featureGroup: drawnItems,
         remove: true
@@ -72,7 +73,10 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       drawnItems.addLayer(leafletEvent.layer);
       console.log("drawnItems: ", drawnItems);
       var drawing = JSON.stringify(drawnItems.toGeoJSON());
-      // var drawing = "'"+JSON.stringify(drawnItems.toGeoJSON().geometry)+"'";
+
+// from github.com/radumas/crowdmap-basic
+      // var drawing = '';
+      // drawing = "'"+JSON.stringify(drawnItems)+"'";
       console.log("Drawing: ", drawing);
 
       $scope.dataFactory.saveDrawnItem(drawing);
@@ -113,33 +117,3 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
   });
 
 }]);
-
-// // Add Data from CartoDB using the SQL API
-// // Declare Variables
-// // Create Global Variable to hold CartoDB points
-// var cartoDBPoints = null;
-//
-// // Set your CartoDB Username
-// var cartoDBusername = "lizzz";
-//
-// // Write SQL Selection Query to be Used on CartoDB Table
-// // Name of table is 'data_collector'
-// var sqlQuery = "SELECT * FROM data_collector";
-//
-// // Get CartoDB selection as GeoJSON and Add to Map
-// function getGeoJSON() {
-//     $.getJSON("https://" + cartoDBusername + ".cartodb.com/api/v2/sql?format=GeoJSON&q=" + sqlQuery, function(data) {
-//         cartoDBPoints = L.geoJson(data, {
-//             pointToLayer: function(feature, latlng) {
-//                 var marker = L.marker(latlng);
-//                 marker.bindPopup('' + feature.properties.description + 'Submitted by ' + feature.properties.name + '');
-//                 return marker;
-//             }
-//         }).addTo(bikemap);
-//     });
-// };
-//
-// // Run showAll function automatically when document loads
-// $(document).ready(function() {
-//     getGeoJSON();
-// });
