@@ -68,7 +68,6 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
   var handle = {
     created: function(e,leafletEvent, leafletObject, model, modelName) {
       // Add newly-drawn feature to leafletEvent layer
-      console.log("created");
       drawnItems.addLayer(leafletEvent.layer);
       console.log("drawnItems: ", drawnItems);
       var drawing = JSON.stringify(drawnItems.toGeoJSON());

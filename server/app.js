@@ -5,19 +5,23 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 /** ---------- OUR MODULES ---------- **/
-var formInput = require('./routes/newcomment');
+var newComment = require('./routes/newcomment');
+var getContacts = require('./routes/contacts');
+
+
+/** ---------- MIDDLEWARE ---------- **/
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 /** ---------- EXPRESS ROUTES ---------- **/
-app.use('/newcomment', formInput);
+app.use('/newcomment', newComment);
+app.use('/contacts', getContacts);
+
 
 app.get('/*', function(req, res) {
   var file = req.params[0] || '/views/index.html';
   res.sendFile(path.join(__dirname, './public', file));
 });
-
-/** ---------- MIDDLEWARE ---------- **/
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
 /** ---------- START SERVER ---------- **/
 app.set('port', process.env.PORT || 3000);

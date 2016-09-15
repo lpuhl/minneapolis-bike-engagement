@@ -16,6 +16,7 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
           last_name: $scope.last_name,
           street: $scope.address,
           city: $scope.city,
+          state: $scope.state,
           zip: $scope.zip,
           phone: $scope.phone,
           email: $scope.email,

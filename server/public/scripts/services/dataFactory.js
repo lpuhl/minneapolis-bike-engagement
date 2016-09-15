@@ -12,10 +12,13 @@ myApp.factory('DataFactory', ['$http', function($http) {
   var saveNewRecord = function(newComment) {
     console.log('newComment in saveNewRecord function: ', newComment);
     console.log('newFeature in saveNewRecord function :', newFeature);
-    console.log('newFeature.features.geometry in saveNewRecord function :', newFeature);
+    var record = newComment;
+    record.geometry = newFeature;
+    console.log('record before http req: ', record);
 
-    $http.post('/newcomment', newComment)
-      .then(function(response) {
+    $http.post('/newcomment', record)
+      .then(
+        function(response) {
         console.log("post response: ", response);
         if(response.status == 201) {
           console.log("saveNewRecord successful");
