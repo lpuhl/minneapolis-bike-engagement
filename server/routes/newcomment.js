@@ -2,12 +2,14 @@ var express = require('express');
 var router = express.Router();
 // var pg = require('pg');
 // var connectionString = 'postgres://localhost:5432/bikeways';
-var http = require('http');
+// var http = require('http');
+var CartoDB = require('cartodb');
 
 // routes
 router.post('/', function(req, res) {
   var record = req.body;
   console.log(record);
+
 
   var sql = "SELECT "+ 'insert_crowd_mapping_data' +"(";
   sql += "'" + record.geometry + "'";
@@ -22,16 +24,10 @@ router.post('/', function(req, res) {
   sql += "," + "'" + record.email + "'";
   sql += "," + "'" + record.list + "');";
   console.log(sql);
-  http({
-    type: 'POST',
-    url: 'https://lizzz.carto.com/api/v2/sql',
-    crossDomain: true,
-    data: {"q":sql},
-    dataType: 'json'
-  }).then(function successCallback(responseData, textStatus, jqXHR) {
-      console.log("Data saved");
-  }, function errorCallback (responseData, textStatus, errorThrown) {
-      console.log("Problem saving the data");
+  cartoUser.execute(sql).done(function(data) {
+    console.log(data);
+  }).error(function (err) {
+      console.log(err);
   });
   console.log("got here to line 37");
 
