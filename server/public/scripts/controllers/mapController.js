@@ -72,20 +72,12 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       // Add newly-drawn feature to leafletEvent layer
       drawnItems.addLayer(leafletEvent.layer);
       console.log("drawnItems: ", drawnItems);
-      var type = leafletEvent.layerType;
-      console.log(type);
-      // if (type == 'polyline') {
-      //   var submittedLine = currentLine.polyline.toGeoJSON();
-      //   console.log(submittedLine);
-      // }
 
-      var drawing = JSON.stringify(drawnItems.toGeoJSON());
-      // console.log(drawnItems.features);
-
-      var drawing = "'"+JSON.stringify(drawnItems.toGeoJSON().features[0]['geometry'])+"'";
+      var drawing = JSON.stringify(drawnItems.toGeoJSON().features[0]['geometry']);
       console.log("Drawing: ", drawing);
 
-      // $scope.dataFactory.saveDrawnItem(drawing);
+      $scope.dataFactory.saveDrawnItem(drawing);
+
       $uibModal.open({
         templateUrl: '/views/partials/inputForm.html',
         controller: 'InputController'
