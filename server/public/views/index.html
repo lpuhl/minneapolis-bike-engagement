@@ -1,26 +1,60 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
-    <title>Leaflet Map</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
-    <link rel="stylesheet" href="./styles/styles.css" />
-    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-    <script type="text/javascript" src= "https://cdn.rawgit.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script>
-    <!-- <script src="./vendor/angular.min.js"></script> -->
-    <!-- <script src="./vendor/angular-leaflet-directive.js"></script> -->
+    <title>Minneapolis Bicycle Wish Map</title>
+
+    <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.draw/leaflet.draw.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="http://leaflet.github.io/Leaflet.draw/leaflet.draw.js"></script>
+    <!-- <script src="./vendor/jquery.min.js"></script> -->
+    <!-- <script src="./vendor/bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="./vendor/angular.js"></script>
+    <script src="./vendor/angular-route.min.js"></script>
+    <script src="./vendor/angular-simple-logger.min.js"></script>
+    <script src="./vendor/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <script src="./vendor/ui-leaflet.min.js"></script>
+    <script src="./vendor/ui-leaflet-draw.js"></script>
+
+    <!--Client side js -->
+    <script src="./scripts/client-config.js"></script>
+    <script type="text/javascript" src="./scripts/services/dataFactory.js"></script>
+    <script type="text/javascript" src="./scripts/controllers/mapController.js"></script>
+    <script type="text/javascript" src="./scripts/controllers/adminController.js"></script>
+    <script type="text/javascript" src="./scripts/controllers/inputController.js"></script>
+
 </head>
 
-<body >
-  <!-- <leaflet></leaflet> -->
-    <h1>Minneapolis Bikeways</h1>
-    <div id="bikemap">
+<body ng-app="myApp">
+    <div id="wrapper">
+        <div id="header">
+            <h1>Minneapolis Bicycle Wish Map</h1>
+        </div>
+        <main ng-view></main>
     </div>
-    <div id="controls" style="margin: 15px;">
-        <button id="addButton">Show All Bars and Coffee Shops</button>
-      <button id="removeButton">Hide All Bars and Coffee Shops</button>
-        <button id="toggleButton">Toggle All Bars and Coffee Shops</button>
-    </div>
-  <script src="./scripts/client-app.js"></script>
-</body>
+    <footer>
+      <a href="#admin-view">Admin login</a>
+    </footer>
 
+
+    <!-- <div id="dialog" title="Point Information">
+      <form>
+        <fieldset style="border: none;">
+          <ul style="list-style-type: none; padding-left: 0px">
+            <li><label for="username">Your Name</label></li>
+            <li><input type="text" name="username" id="username" placeholder="Enter your name" class="text ui-widget-content ui-corner-all"></li>
+            <li><label for="description">About this Point</label></li>
+            <li><input type="text" name="description" id="description" placeholder="Description for this point" class="text ui-widget-content ui-corner-all"></li>
+          </ul>
+          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+      </form>
+    </div> -->
+
+
+</body>
 </html>

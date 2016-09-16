@@ -1,4 +1,7 @@
-#bikemap { height: 600px; }
+#map {
+  height: 600px;
+  width: 1000px;
+}
 
 a {
   text-decoration: none;
@@ -7,4 +10,11 @@ a {
 img {
   width: 50%;
 }
-  
+
+footer {
+  float:right;
+}
+
+.text-link {
+  text-align:right;
+}

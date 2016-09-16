@@ -1,11 +1,11 @@
 {
-  "name": "duspviz-3-webmap-basics",
+  "name": "bikeways_wishmap",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "node server/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodemon server/app.js"
   },
   "keywords": [
     "leaflet"
@@ -15,6 +15,14 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-route": "^1.5.8",
-    "express": "^4.14.0"
+    "angular-simple-logger": "^0.1.7",
+    "angular-ui-bootstrap": "^2.1.3",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "leaflet-draw": "^0.3.2",
+    "pg": "^6.1.0",
+    "ui-leaflet": "^1.0.1",
+    "ui-leaflet-draw": "0.0.3"
   }
 }
