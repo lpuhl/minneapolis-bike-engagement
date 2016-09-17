@@ -1,4 +1,6 @@
 // 'use strict';
+// var CartoDB = require('cartodb');
+
 myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leafletData', '$uibModal', 'DataFactory', function ($scope, $http, leafletDrawEvents, leafletData, $uibModal, DataFactory){
   console.log("map controller working!");
   $scope.dataFactory = DataFactory;
@@ -7,6 +9,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
   var drawnItems = new L.FeatureGroup();
   var currentLine = null;
   var markerDrawer = null;
+  var featuresFromDB = null;
 
   angular.extend($scope, {
     map: {
@@ -114,6 +117,12 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       });
   });
 
+  $scope.getFeaturesFromDB = function() {
+    $scope.dataFactory.getFeaturesFromDB().then(function() {
+      $scope.dbFeatures = $scope.dataFactory.getDataFromDB();
+      console.log("data from DB: ", $scope.dbFeatures);
+    });
+  };
 }]);
 
 // // Add Data from CartoDB using the SQL API

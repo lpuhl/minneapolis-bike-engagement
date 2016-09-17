@@ -16,15 +16,15 @@
   </tr>
 
 <tr id="contactRow" ng-repeat="contact in contacts">
-  <td>{{contact.firstname}}</td>
-  <td>{{contact.lastname}}</td>
-  <td><p>{{contact.street}}</p>
-      <p>{{contact.city}}, {{contact.state}}, {{contact.zip}}</p></td>
-      <td>{{contact.phone}}</td>
-  <td>{{contact.email}}</td>
-  <td>{{contact.list}}</td>
-  <td>{{contact.comment}}</td>
-  <td>{{contact.date}}</td>
+  <td>{{contact.properties.firstname}}</td>
+  <td>{{contact.properties.lastname}}</td>
+  <td><p>{{contact.properties.street}}</p>
+      <p>{{contact.properties.city}}, {{contact.properties.state}}, {{contact.properties.zip}}</p></td>
+      <td>{{contact.properties.phone}}</td>
+  <td>{{contact.properties.email}}</td>
+  <td>{{contact.properties.list}}</td>
+  <td>{{contact.properties.comment}}</td>
+  <td>{{contact.properties.date}}</td>
   <!-- <td>{{contact.map}}</td> -->
 
 
