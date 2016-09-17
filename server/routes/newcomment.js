@@ -10,6 +10,7 @@ router.post('/', function(req, res) {
   var record = req.body;
   console.log(record);
 
+  var cartoUser = new CartoDB.SQL({'user':'lizzz', 'api_key':'f4a44b60db13393514e7e8ff3ceb79245b852f51'});
 
   var sql = "SELECT "+ 'insert_crowd_mapping_data' +"(";
   sql += "'" + record.geometry + "'";
@@ -31,79 +32,10 @@ router.post('/', function(req, res) {
   });
   console.log("got here");
 
-  // Store in DB
-  // pg.connect(connectionString, function(err, client, done) {
-  //   if(err) {
-  //     console.log('connection error :', err);
-  //     res.sendStatus(500);
-  //   }
-  //   console.log('connect record: ', record);
-  //   client.query('INSERT INTO bikemap (firstname, lastname, street, city, state, zip, phone, email, list, comment, geometry) ' +
-  //                'VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-  //     [record.first_name, record.last_name, record.street, record.city, record.state, record.zip, record.phone, record.email, record.list, record.comment, record.geometry],
-  //     function(err, result) {
-  //       done();
-  //       if(err) {
-  //         console.log("query error: ", err);
-  //         res.sendStatus(500);
-  //       }
-  //       // created!
-  //       res.sendStatus(201);
-  //     });
-  // });
 });
 
 module.exports = router;
 
-//   router.get('/', function(req, res) {
-//   pg.connect(connectionString, function(err, client, done) {
-//     if(err) {
-//       console.log(err);
-//       res.sendStatus(500);
-//     }
-//
-//     client.query("SELECT * FROM pets",
-//       function(err, result) {
-//         done();
-//
-//         if(err) {
-//           console.log("select error: ", err);
-//           res.sendStatus(500);
-//         }
-//         // console.log('results: ', resultStuff);
-//
-//         res.send(result.rows);
-//     });
-//
-//   });
-// });
-
-
-//
-// router.put('/:id', function(req, res) {
-//   var petID = req.params.id;
-//
-//   pg.connect(connectionString, function(err, client, done) {
-//     if(err) {
-//       console.log(err);
-//       res.sendStatus(500);
-//     }
-//
-//     client.query("UPDATE pets SET completed_date = 'NOW()' WHERE id = $1",
-//       [petID],
-//       function(err, result) {
-//         done();
-//
-//         if(err) {
-//           console.log("update error: ", err);
-//           res.sendStatus(500);
-//         }
-//
-//         res.sendStatus(200);
-//     });
-//   });
-// });
-//
 // router.delete('/:id', function(req, res) {
 //   var petID = req.params.id;
 //

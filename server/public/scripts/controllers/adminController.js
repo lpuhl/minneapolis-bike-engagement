@@ -8,20 +8,10 @@ myApp.controller("adminController", ["$scope", "$http", "DataFactory", function(
   function getFeaturesFromDB() {
     $scope.dataFactory.getFeaturesFromDB().then(function() {
       $scope.dbFeatures = $scope.dataFactory.getDataFromDB();
-      console.log("data from DB: ", $scope.dbFeatures);
       $scope.contacts = $scope.dbFeatures;
       console.log('contacts: ', $scope.contacts)
     });
   };
-
-
-  // getContacts();
-  // function getContacts() {
-  //   $http.get('/contacts').then(function(response) {
-  //     console.log('data', response.data);
-  //     $scope.contacts = response.data;
-  //   });
-  // }
 
 
 }]);

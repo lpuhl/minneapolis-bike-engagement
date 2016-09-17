@@ -10,6 +10,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
   var currentLine = null;
   var markerDrawer = null;
   var featuresFromDB = null;
+  var savedFeatures = new L.FeatureGroup();
 
   angular.extend($scope, {
     map: {
@@ -40,6 +41,8 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
               attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
             }
           }
+        },
+        geojson: {
         }
       },
       defaults: {
@@ -68,6 +71,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       }
     }
   });
+
 
 // from github.com/angular-ui/ui-leaflet-draw/blob/master/index.html
   var handle = {
@@ -117,10 +121,30 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       });
   });
 
+
   $scope.getFeaturesFromDB = function() {
     $scope.dataFactory.getFeaturesFromDB().then(function() {
       $scope.dbFeatures = $scope.dataFactory.getDataFromDB();
       console.log("data from DB: ", $scope.dbFeatures);
+      // var dbLayer = L.geoJson().addTo($scope.map);
+      // dbLayer.addData($scope.dbFeatures);
+
+      angular.extend($scope, {
+        geojson:{
+              data: $scope.dbFeatures,
+              style: {
+                  // fillColor: "green",
+                  // weight: 2,
+                  // opacity: 1,
+                  // color: 'white',
+                  // dashArray: '3',
+                  // fillOpacity: 0.2
+              },
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.comment);
+          }
+        }
+      });
     });
   };
 }]);
