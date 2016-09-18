@@ -1,3 +1,4 @@
+
 // 'use strict';
 // var CartoDB = require('cartodb');
 
@@ -137,6 +138,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       console.log("getMap running");
         leafletData.getGeoJSON().then(function (geoJSON) {
             map.removeLayer(geoJSON);
+            drawnItems.clearLayers();
             $scope.loadGeojson();
         });
     });
@@ -174,6 +176,13 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
     });
   };
 
+  // setInterval(function() {
+  //   var drawingStatus = $scope.dataFactory.getDrawingStatus();
+  //   if (drawingStatus == true) {
+  //     console.log(drawingStatus);
+  //     drawnItems.clearLayers();
+  //   }
+  // }, 2000);
 
 
 // End controller

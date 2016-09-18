@@ -29,16 +29,15 @@
     <script type="text/javascript" src="./scripts/controllers/adminController.js"></script>
     <script type="text/javascript" src="./scripts/controllers/inputController.js"></script>
     <script src="./scripts/userconfig.js"></script>
-
-
 </head>
 
 <body ng-app="myApp">
     <div id="wrapper">
-        <div id="header">
+        <header id="header">
             <h1>Minneapolis Bicycle Wish Map</h1>
-        </div>
-        <main ng-view></main>
+        </header>
+        <main ng-view class="content">
+        </main>
     </div>
     <!-- <footer>
       <a href="#admin-view">Admin login</a>

@@ -29,6 +29,8 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
       $uibModalInstance.close();
       openThankYou();
       /// run factory function that will remove drawnItems layer from map and reset it
+      
+
   }
 
   var openThankYou = function () {

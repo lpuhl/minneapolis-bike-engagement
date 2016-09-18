@@ -1,36 +1,39 @@
-<div class="pageHeader">
-  <button class="btn btn-primary" onclick="location.href='#home'">Switch to Map View</button>
+<div class = "adminview">
+
+  <div class="pageHeader">
+  </div>
+  <h2>Contacts</h2>
+  <table class="table">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>email</th>
+      <th>List</th>
+      <th>Comment</th>
+      <th>Date</th>
+      <!-- <th>Map</th> -->
+    </tr>
+
+    <tr id="contactRow" ng-repeat="contact in contacts">
+      <td>{{contact.properties.firstname}}</td>
+      <td>{{contact.properties.lastname}}</td>
+      <td><p>{{contact.properties.street}}</p>
+          <p>{{contact.properties.city}}, {{contact.properties.state}}, {{contact.properties.zip}}</p></td>
+          <td>{{contact.properties.phone}}</td>
+      <td>{{contact.properties.email}}</td>
+      <td>{{contact.properties.list}}</td>
+      <td>{{contact.properties.comment}}</td>
+      <td>{{contact.properties.date}}</td>
+      <!-- <td>{{contact.map}}</td> -->
+      <!-- <td><input ng-click="deleteEmployee($index)" type="submit" value="Delete Employee"/></td> -->
+    </tr>
+  </table>
+  <div class="buttons">
+    <button class="btn btn-primary" onclick="location.href='#home'">Switch to Map View</button>
+  </div>
+  <footer>
+    <a href="#admin-view">Log out</a>
+  </footer>
 </div>
-<h2>Contacts</h2>
-<table class="table">
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Address</th>
-    <th>Phone</th>
-    <th>email</th>
-    <th>List</th>
-    <th>Comment</th>
-    <th>Date</th>
-    <th>Map</th>
-  </tr>
-
-<tr id="contactRow" ng-repeat="contact in contacts">
-  <td>{{contact.properties.firstname}}</td>
-  <td>{{contact.properties.lastname}}</td>
-  <td><p>{{contact.properties.street}}</p>
-      <p>{{contact.properties.city}}, {{contact.properties.state}}, {{contact.properties.zip}}</p></td>
-      <td>{{contact.properties.phone}}</td>
-  <td>{{contact.properties.email}}</td>
-  <td>{{contact.properties.list}}</td>
-  <td>{{contact.properties.comment}}</td>
-  <td>{{contact.properties.date}}</td>
-  <!-- <td>{{contact.map}}</td> -->
-
-
-  <!-- <td><input ng-click="deleteEmployee($index)" type="submit" value="Delete Employee"/></td> -->
-</tr>
-</table>
-<footer>
-  <a href="#admin-view">Log out</a>
-</footer>

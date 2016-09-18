@@ -2,11 +2,9 @@ myApp.controller('ThanksController', ['$scope', '$http', '$uibModal', '$uibModal
   console.log("thanks controller working!");
 
   $scope.dataFactory = DataFactory;
-  console.log($scope.dataFactory.newDrawing);
 
   $scope.cancelForm = function () {
     $uibModalInstance.dismiss();
-    $scope.map.removeLayer($scope.dataFactory.newDrawing);
   };
 
 

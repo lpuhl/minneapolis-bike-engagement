@@ -3,16 +3,16 @@ myApp.factory('DataFactory', ['$http', function($http) {
 
   var newFeature;
   var dbFeatures = {};
-
+  // var drawingStatus = undefined;
 
   var intakeDrawnItem = function(item) {
     console.log('intakeDrawnItem function running');
     newFeature = item;
     console.log('new feature in factory: ', newFeature);
-    return newFeature;
   };
 
   var saveNewRecord = function(newComment) {
+    // drawingStatus = undefined;
     console.log('newComment in saveNewRecord function: ', newComment);
     console.log('newFeature in saveNewRecord function :', newFeature);
     var record = newComment;
@@ -29,7 +29,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
           console.log("error posting new comment");
         }
       });
-
+    drawingStatus = true;
   };
 
   var baseURL = 'https://lizzz.carto.com/api/v2/sql?format=GeoJSON&q=';
@@ -42,7 +42,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
     // var request = encodeURI(query);
     // console.log('request: ', request)
     var promise = $http.jsonp(query).then(function(data) {
-      // console.log("full data from db: ", data);
+      console.log("full data from db: ", data);
       console.log("data from db: ", data.data.features);
       dbFeatures = data.data.features;
       // return dbFeatures;
@@ -66,10 +66,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
 
 
   return {
-    newDrawing: function() {
-      console.log('newFeature from factory: ', newFeature);
-      return newFeature;
-    },
+
     saveDrawnItem: function(drawing) {
       // console.log('saveDrawnItem running from factory:');
       return intakeDrawnItem(drawing);
@@ -84,6 +81,9 @@ myApp.factory('DataFactory', ['$http', function($http) {
     getDataFromDB: function() {
       return sendDBFeatures();
     }
+    // getDrawingStatus: function() {
+    //   return drawingStatus;
+    // }
   }
 
 }]);
