@@ -18,3 +18,8 @@ footer {
 .text-link {
   text-align:right;
 }
+
+.alert {
+  background-color: lightgreen;
+  color: darkgreen;
+}

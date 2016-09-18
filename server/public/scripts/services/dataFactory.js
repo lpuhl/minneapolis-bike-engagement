@@ -9,6 +9,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
     console.log('intakeDrawnItem function running');
     newFeature = item;
     console.log('new feature in factory: ', newFeature);
+    return newFeature;
   };
 
   var saveNewRecord = function(newComment) {
@@ -41,7 +42,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
     // var request = encodeURI(query);
     // console.log('request: ', request)
     var promise = $http.jsonp(query).then(function(data) {
-      console.log("full data from db: ", data);
+      // console.log("full data from db: ", data);
       console.log("data from db: ", data.data.features);
       dbFeatures = data.data.features;
       // return dbFeatures;
@@ -65,7 +66,10 @@ myApp.factory('DataFactory', ['$http', function($http) {
 
 
   return {
-
+    newDrawing: function() {
+      console.log('newFeature from factory: ', newFeature);
+      return newFeature;
+    },
     saveDrawnItem: function(drawing) {
       // console.log('saveDrawnItem running from factory:');
       return intakeDrawnItem(drawing);

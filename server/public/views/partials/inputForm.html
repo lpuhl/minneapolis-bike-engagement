@@ -1,6 +1,4 @@
 <!-- Modal -->
-<!-- <div ng-controller="InputController"> -->
-  <!-- <script type="text/ng-template" id="inputForm.html"> -->
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelForm()">
           <span aria-hidden="true">&times;</span>
@@ -41,5 +39,9 @@
         <button type="button" class="btn btn-secondary" ng-click="cancelForm()">Cancel</button>
         <button ng-click="saveComment()" type="button" class="btn btn-primary">Save</button>
       </div>
-    <!-- </script> -->
+
+
+<!-- Success Alert -->
+<!-- <div ng-controller="thanksController"> -->
+<!-- <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div> -->
 <!-- </div> -->
