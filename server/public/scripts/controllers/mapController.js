@@ -41,8 +41,6 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
               attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
             }
           }
-        },
-        geojson: {
         }
       },
       defaults: {
@@ -142,9 +140,25 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
               },
           onEachFeature: function (feature, layer) {
             layer.bindPopup(feature.properties.comment);
+            console.log($scope.geojson);
           }
+
         }
       });
+
+      console.log($scope.geojson);
+
+
+      $scope.toggleOverlay = function(overlayName) {
+        var overlay = $scope.geojson;
+        if (overlay.hasOwnProperty(overlayName)) {
+            delete overlay[overlayName];
+        } else {
+            overlay[overlayName] = $scope.definedOverlays[overlayName];
+        }
+      };
+
+
     });
   };
 }]);
