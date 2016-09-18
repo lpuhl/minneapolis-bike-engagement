@@ -1,14 +1,17 @@
-myApp.controller("adminController", ["$scope", "$http", function($scope, $http) {
+myApp.controller("adminController", ["$scope", "$http", "DataFactory", function($scope, $http, DataFactory) {
   console.log("admin controller working!");
 
-  getContacts();
+  $scope.dataFactory = DataFactory;
 
-  function getContacts() {
-    $http.get('/contacts').then(function(response) {
-      console.log('data', response.data);
-      $scope.contacts = response.data;
+  getFeaturesFromDB();
+
+  function getFeaturesFromDB() {
+    $scope.dataFactory.getFeaturesFromDB().then(function() {
+      $scope.dbFeatures = $scope.dataFactory.getDataFromDB();
+      $scope.contacts = $scope.dbFeatures;
+      console.log('contacts: ', $scope.contacts)
     });
-  }
+  };
 
 
 }]);

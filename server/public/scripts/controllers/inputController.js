@@ -12,8 +12,8 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
       // var comment = $scope.comment;
       var newComment = {
           comment: $scope.comment,
-          first_name: $scope.first_name,
-          last_name: $scope.last_name,
+          firstname: $scope.first_name,
+          lastname: $scope.last_name,
           street: $scope.address,
           city: $scope.city,
           state: $scope.state,

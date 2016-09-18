@@ -1,4 +1,6 @@
 // 'use strict';
+// var CartoDB = require('cartodb');
+
 myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leafletData', '$uibModal', 'DataFactory', function ($scope, $http, leafletDrawEvents, leafletData, $uibModal, DataFactory){
   console.log("map controller working!");
   $scope.dataFactory = DataFactory;
@@ -7,6 +9,8 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
   var drawnItems = new L.FeatureGroup();
   var currentLine = null;
   var markerDrawer = null;
+  var featuresFromDB = null;
+  var savedFeatures = new L.FeatureGroup();
 
   angular.extend($scope, {
     map: {
@@ -66,26 +70,19 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
     }
   });
 
+
 // from github.com/angular-ui/ui-leaflet-draw/blob/master/index.html
   var handle = {
     created: function(e,leafletEvent, leafletObject, model, modelName) {
       // Add newly-drawn feature to leafletEvent layer
       drawnItems.addLayer(leafletEvent.layer);
       console.log("drawnItems: ", drawnItems);
-      var type = leafletEvent.layerType;
-      console.log(type);
-      // if (type == 'polyline') {
-      //   var submittedLine = currentLine.polyline.toGeoJSON();
-      //   console.log(submittedLine);
-      // }
 
-      var drawing = JSON.stringify(drawnItems.toGeoJSON());
-      // console.log(drawnItems.features);
-
-      var drawing = "'"+JSON.stringify(drawnItems.toGeoJSON().features[0]['geometry'])+"'";
+      var drawing = JSON.stringify(drawnItems.toGeoJSON().features[0]['geometry']);
       console.log("Drawing: ", drawing);
 
-      // $scope.dataFactory.saveDrawnItem(drawing);
+      $scope.dataFactory.saveDrawnItem(drawing);
+
       $uibModal.open({
         templateUrl: '/views/partials/inputForm.html',
         controller: 'InputController'
@@ -122,6 +119,48 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       });
   });
 
+
+  $scope.getFeaturesFromDB = function() {
+    $scope.dataFactory.getFeaturesFromDB().then(function() {
+      $scope.dbFeatures = $scope.dataFactory.getDataFromDB();
+      console.log("data from DB: ", $scope.dbFeatures);
+      // var dbLayer = L.geoJson().addTo($scope.map);
+      // dbLayer.addData($scope.dbFeatures);
+
+      angular.extend($scope, {
+        geojson:{
+              data: $scope.dbFeatures,
+              style: {
+                  // fillColor: "green",
+                  // weight: 2,
+                  // opacity: 1,
+                  // color: 'white',
+                  // dashArray: '3',
+                  // fillOpacity: 0.2
+              },
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.comment);
+            console.log($scope.geojson);
+          }
+
+        }
+      });
+
+      console.log($scope.geojson);
+
+
+      $scope.toggleOverlay = function(overlayName) {
+        var overlay = $scope.geojson;
+        if (overlay.hasOwnProperty(overlayName)) {
+            delete overlay[overlayName];
+        } else {
+            overlay[overlayName] = $scope.definedOverlays[overlayName];
+        }
+      };
+
+
+    });
+  };
 }]);
 
 // // Add Data from CartoDB using the SQL API

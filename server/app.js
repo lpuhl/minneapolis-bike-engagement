@@ -6,8 +6,8 @@ var bodyParser = require('body-parser');
 
 /** ---------- OUR MODULES ---------- **/
 var newComment = require('./routes/newcomment');
-var getContacts = require('./routes/contacts');
-
+// var getContacts= require('./routes/contacts');
+var getFeatures= require('./routes/getFeatures');
 
 /** ---------- MIDDLEWARE ---------- **/
 app.use(bodyParser.json());
@@ -15,7 +15,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 /** ---------- EXPRESS ROUTES ---------- **/
 app.use('/newcomment', newComment);
-app.use('/contacts', getContacts);
+// app.use('/contacts', getContacts);
+app.use('/getFeatures', getFeatures);
 
 
 app.get('/*', function(req, res) {
