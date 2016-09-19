@@ -3,6 +3,9 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
 
   $scope.dataFactory = DataFactory;
 
+  $scope.states = ["MN", "IA", "ND", "SD", "WI", "MB", "ON"];
+  $scope.selectedOption = $scope.states[0];
+
   $scope.cancelForm = function () {
     $uibModalInstance.dismiss();
   };
@@ -27,8 +30,17 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
 
       // close modal window
       $uibModalInstance.close();
-
+      openThankYou();
       /// run factory function that will remove drawnItems layer from map and reset it
+
+
+  }
+
+  var openThankYou = function () {
+    $uibModal.open({
+    templateUrl: '/views/partials/thankyou.html',
+    controller: 'ThanksController'
+    });
   }
 
 

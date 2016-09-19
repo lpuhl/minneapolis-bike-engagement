@@ -1,14 +1,90 @@
-#map {
-  height: 600px;
-  width: 1000px;
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+   border: 0;
+   margin: 0;
+   font-size: 100%;
+   font: inherit;
+}
+
+@font-face  {
+  font-family: 'SourceSansPro-Regular';
+  src: url('SourceSansPro-Regular.otf');
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face  {
+  font-family: 'SourceSansPro-Regular';
+  src: url('SourceSansPro-Semibold.otf');
+  font-style: normal;
+  font-weight: bold;;
+}
+
+
+body {
+  font-family: 'SourceSansPro-Regular', Geneva, Tahoma, sans-serif;
+  background-color: #eeffcc;
+}
+
+#wrapper {
+  /*margin: 0 auto 100px;*/
+  /*width: 800px;*/
+  /*padding: 60px;*/
+  /*border-radius: 24px;*/
+}
+
+main {
+  margin-top: 20px;
+}
+
+.content {
+  margin: 0 10% 0 5%;
+}
+
+header {
+  background-color: yellowgreen;
+}
+
+header h1 {
+  position: relative;
+  font-size: 3.5em;
+  color: white;
+  margin: 0 .5em .5em 1em;
+  padding: .5em;
+}
+
+#bike {
+  height: 11.5em;
+  float:right;
+  padding: 0 2em 3em 0;
+
+  margin-top: 0;
+}
+
+
+.admin {
+  float:right;
+}
+
+
+h2 {
+  font-size: 2em;
+  font-weight: bold;
+  padding: .5em .5em .5em .25em;
+}
+
+h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: .5em .5em .5em .25em;
+}
+
+textarea {
+  height: 50px;
 }
 
 a {
   text-decoration: none;
-}
-
-img {
-  width: 50%;
 }
 
 footer {
@@ -17,4 +93,27 @@ footer {
 
 .text-link {
   text-align:right;
+}
+
+.alert {
+  background-color: lightgreen;
+  color: darkgreen;
+}
+
+.buttons {
+  margin-top: 1em;
+}
+
+.app-modal-window .modal-dialog {
+  width: 30em;
+}
+
+.optional-info {
+  font-style: italic;
+  font-size: 1.25em;
+  margin-bottom: : 2em;
+}
+
+.statezip {
+  padding: top: .5em;
 }

@@ -3,7 +3,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
 
   var newFeature;
   var dbFeatures = {};
-
+  // var drawingStatus = undefined;
 
   var intakeDrawnItem = function(item) {
     console.log('intakeDrawnItem function running');
@@ -12,6 +12,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
   };
 
   var saveNewRecord = function(newComment) {
+    // drawingStatus = undefined;
     console.log('newComment in saveNewRecord function: ', newComment);
     console.log('newFeature in saveNewRecord function :', newFeature);
     var record = newComment;
@@ -28,7 +29,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
           console.log("error posting new comment");
         }
       });
-
+    drawingStatus = true;
   };
 
   var baseURL = 'https://lizzz.carto.com/api/v2/sql?format=GeoJSON&q=';
@@ -80,6 +81,9 @@ myApp.factory('DataFactory', ['$http', function($http) {
     getDataFromDB: function() {
       return sendDBFeatures();
     }
+    // getDrawingStatus: function() {
+    //   return drawingStatus;
+    // }
   }
 
 }]);

@@ -1,3 +1,4 @@
+
 // 'use strict';
 // var CartoDB = require('cartodb');
 
@@ -7,8 +8,6 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
 
   // Initialise the FeatureGroup to store drawn layers
   var drawnItems = new L.FeatureGroup();
-  var currentLine = null;
-  var markerDrawer = null;
   var featuresFromDB = null;
   var savedFeatures = new L.FeatureGroup();
 
@@ -17,7 +16,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       minneapolis: {
         lat: 44.9766,
         lng: -93.2655,
-        zoom: 12
+        zoom: 14
       },
       layers: {
         baselayers: {
@@ -41,6 +40,8 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
               attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
             }
           }
+        },
+        overlays: {
         }
       },
       defaults: {
@@ -64,7 +65,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
         },
         edit: {
         featureGroup: drawnItems,
-        remove: true
+        remove: false
         }
       }
     }
@@ -76,8 +77,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
     created: function(e,leafletEvent, leafletObject, model, modelName) {
       // Add newly-drawn feature to leafletEvent layer
       drawnItems.addLayer(leafletEvent.layer);
-      console.log("drawnItems: ", drawnItems);
-
+      // console.log("drawnItems: ", drawnItems);
       var drawing = JSON.stringify(drawnItems.toGeoJSON().features[0]['geometry']);
       console.log("Drawing: ", drawing);
 
@@ -85,7 +85,8 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
 
       $uibModal.open({
         templateUrl: '/views/partials/inputForm.html',
-        controller: 'InputController'
+        controller: 'InputController',
+        windowClass: 'app-modal-window'
       });
     },
     edited: function(arg) {},
@@ -119,76 +120,71 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       });
   });
 
+  console.log($scope.map.layers);
+
+////--------- from http://jsfiddle.net/jehope/9x86F/ --------------
+  $scope.loadGeojson = function () {
+      angular.extend($scope, {
+          geojson: {
+              data: $scope.dbFeatures,
+              filter: function (feature) {
+                  return feature.properties.show;
+              }
+          }
+      });
+  };
+
+  $scope.hideGeoJSON = function() {
+    leafletData.getMap().then(function (map) {
+      console.log("getMap running");
+        leafletData.getGeoJSON().then(function (geoJSON) {
+            map.removeLayer(geoJSON);
+            drawnItems.clearLayers();
+            $scope.loadGeojson();
+        });
+    });
+    console.log($scope.geojson);
+  }
+////---------------------------------------------------------------
 
   $scope.getFeaturesFromDB = function() {
     $scope.dataFactory.getFeaturesFromDB().then(function() {
       $scope.dbFeatures = $scope.dataFactory.getDataFromDB();
       console.log("data from DB: ", $scope.dbFeatures);
-      // var dbLayer = L.geoJson().addTo($scope.map);
-      // dbLayer.addData($scope.dbFeatures);
 
       angular.extend($scope, {
-        geojson:{
-              data: $scope.dbFeatures,
-              style: {
-                  // fillColor: "green",
-                  // weight: 2,
-                  // opacity: 1,
-                  // color: 'white',
-                  // dashArray: '3',
-                  // fillOpacity: 0.2
-              },
-          onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.comment);
-            console.log($scope.geojson);
+          geojson:{
+                name: 'Comments',
+                type: 'geoJSONShape',
+                data: $scope.dbFeatures,
+                layerOptions: {
+                  showOnSelector: true,
+                },
+                style: {
+                    // fillColor: "green",
+                    // weight: 2,
+                    // opacity: 1,
+                    // color: 'white',
+                    // dashArray: '3',
+                    // fillOpacity: 0.2
+                },
+                onEachFeature: function (feature, layer) {
+                  layer.bindPopup(feature.properties.comment);
+                }
+
           }
-
-        }
       });
-
-      console.log($scope.geojson);
-
-
-      $scope.toggleOverlay = function(overlayName) {
-        var overlay = $scope.geojson;
-        if (overlay.hasOwnProperty(overlayName)) {
-            delete overlay[overlayName];
-        } else {
-            overlay[overlayName] = $scope.definedOverlays[overlayName];
-        }
-      };
-
-
     });
   };
-}]);
 
-// // Add Data from CartoDB using the SQL API
-// // Declare Variables
-// // Create Global Variable to hold CartoDB points
-// var cartoDBPoints = null;
-//
-// // Set your CartoDB Username
-// var cartoDBusername = "lizzz";
-//
-// // Write SQL Selection Query to be Used on CartoDB Table
-// // Name of table is 'data_collector'
-// var sqlQuery = "SELECT * FROM data_collector";
-//
-// // Get CartoDB selection as GeoJSON and Add to Map
-// function getGeoJSON() {
-//     $.getJSON("https://" + cartoDBusername + ".cartodb.com/api/v2/sql?format=GeoJSON&q=" + sqlQuery, function(data) {
-//         cartoDBPoints = L.geoJson(data, {
-//             pointToLayer: function(feature, latlng) {
-//                 var marker = L.marker(latlng);
-//                 marker.bindPopup('' + feature.properties.description + 'Submitted by ' + feature.properties.name + '');
-//                 return marker;
-//             }
-//         }).addTo(bikemap);
-//     });
-// };
-//
-// // Run showAll function automatically when document loads
-// $(document).ready(function() {
-//     getGeoJSON();
-// });
+  // setInterval(function() {
+  //   var drawingStatus = $scope.dataFactory.getDrawingStatus();
+  //   if (drawingStatus == true) {
+  //     console.log(drawingStatus);
+  //     drawnItems.clearLayers();
+  //   }
+  // }, 2000);
+
+
+// End controller
+}]);

@@ -1,45 +1,57 @@
 <!-- Modal -->
-<!-- <div ng-controller="InputController"> -->
-  <!-- <script type="text/ng-template" id="inputForm.html"> -->
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelForm()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Tell us what you think!</h4>
+<div class="form-group">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelForm()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="modal-title" id="myModalLabel">Tell us what you think!</h4>
+    <textarea width="100%" ng-model="comment" type="text" id="comment" name="comment" placeholder="Your comments here" class="form-control" ></textarea>
+
+  </div>
+  <div class="modal-body">
+        <h4 class="optional-info">Optional Information</h4>
+        <p><label for="first_name">First Name</label>
+        <input ng-model="first_name" type="text" id="first_name" name="first_name" class="form-control" />
+
+        <label for="last_name">Last Name</label>
+        <input ng-model="last_name" type="text" id="last_name" name="last_name" class="form-control" /></p>
+
+        <p><label for="address">Address</label>
+        <input ng-model="address" type="text" id="address" name="address" class="form-control" /></p>
+
+        <label for="city">City</label>
+        <input ng-model="city" type="text" id="city" name="city" class="form-control" />
+
+        <div class="statezip">
+
+        <select ng-model="state" >
+          <!-- <option value="MN" ng-selected="true">MN</option> -->
+          <option ng-repeat="state in states" type="button" id="state" name="state" value="{{state}}">{{state}}
+          </option>
+        </select>
+
+        <label for="zip">Zip</label>
+        <input ng-model="zip" type="text" id="zip" name="zip" />
       </div>
-      <div class="modal-body">
-            <textarea ng-model="comment" type="text" id="comment" name="comment" placeholder="Your comments here!"></textarea>
-            <p><label for="first_name">First Name</label>
-            <input ng-model="first_name" type="text" id="first_name" name="first_name" />
 
-            <label for="last_name">Last Name</label>
-            <input ng-model="last_name" type="text" id="last_name" name="last_name" /></p>
+        <p><label for="phone" >Phone</label>
+        <input ng-model="phone" type="text" id="phone" name="phone" placeholder="555-555-5555" class="form-control" />
 
-            <p><label for="address">Address</label>
-            <input ng-model="address" type="text" id="address" name="address" />
+        <label for="email">email</label>
+        <input ng-model="email" type="email" id="email" name="email" class="form-control" />
+        </p>
 
-            <label for="city">City</label>
-            <input ng-model="city" type="text" id="city" name="city" />
+        <label for="list">Yes, please keep me in the loop!</label>
+        <input type="checkbox" ng-model="list" id="list" name="list"/>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" ng-click="cancelForm()">Cancel</button>
+    <button ng-click="saveComment()" type="button" class="btn btn-primary">Save</button>
+  </div>
+</div>
 
-            <label for="state">State</label>
-            <input ng-model="state" type="text" id="state" name="state" />
 
-            <label for="zip">Zip</label>
-            <input ng-model="zip" type="text" id="zip" name="zip" /></p>
-
-            <p><label for="phone" >Phone</label>
-            <input ng-model="phone" type="text" id="phone" name="phone" placeholder="555-555-5555"/>
-
-            <label for="email">email</label>
-            <input ng-model="email" type="text" id="email" name="email" />
-            </p>
-
-            <label for="list">Yes, please keep me in the loop!</label>
-            <input type="checkbox" ng-model="list" id="list" name="list"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" ng-click="cancelForm()">Cancel</button>
-        <button ng-click="saveComment()" type="button" class="btn btn-primary">Save</button>
-      </div>
-    <!-- </script> -->
+<!-- Success Alert -->
+<!-- <div ng-controller="thanksController"> -->
+<!-- <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div> -->
 <!-- </div> -->

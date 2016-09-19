@@ -10,7 +10,7 @@ router.post('/', function(req, res) {
   var record = req.body;
   console.log(record);
 
-  
+
   var sql = "SELECT "+ 'insert_crowd_mapping_data' +"(";
   sql += "'" + record.geometry + "'";
   sql += "," + "'" + record.comment + "'";
@@ -34,28 +34,3 @@ router.post('/', function(req, res) {
 });
 
 module.exports = router;
-
-// router.delete('/:id', function(req, res) {
-//   var petID = req.params.id;
-//
-//   pg.connect(connectionString, function(err, client, done) {
-//     if(err) {
-//       console.log(err);
-//       res.sendStatus(500);
-//     }
-//
-//   client.query("DELETE FROM pets WHERE id = $1",
-//       [petID],
-//       function(err, result) {
-//         done();
-//
-//         if(err) {
-//           console.log("delete error: ", err);
-//           res.sendStatus(500);
-//         }
-//
-//         res.sendStatus(202);
-//     });
-//   });
-//
-// });
