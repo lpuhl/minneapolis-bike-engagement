@@ -85,7 +85,8 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
 
       $uibModal.open({
         templateUrl: '/views/partials/inputForm.html',
-        controller: 'InputController'
+        controller: 'InputController',
+        windowClass: 'app-modal-window'
       });
     },
     edited: function(arg) {},

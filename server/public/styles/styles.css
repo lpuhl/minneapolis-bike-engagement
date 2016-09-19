@@ -45,8 +45,8 @@ main {
 header {
   background-color: yellowgreen;
 }
-footer {
-
+.admin {
+  float:right;
 }
 
 h1 {
@@ -61,6 +61,13 @@ h2 {
   font-weight: bold;
   padding: .5em .5em .5em .25em;
 }
+
+h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: .5em .5em .5em .25em;
+}
+
 
 a {
   text-decoration: none;
@@ -85,4 +92,13 @@ footer {
 
 .buttons {
   margin-top: 1em;
+}
+
+.app-modal-window .modal-dialog {
+  width: 30em;
+}
+
+.optional-info {
+  font-style: italic;
+  padding-bottom: : 1em;
 }

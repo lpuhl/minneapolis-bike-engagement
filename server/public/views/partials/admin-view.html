@@ -20,20 +20,18 @@
       <td>{{contact.properties.firstname}}</td>
       <td>{{contact.properties.lastname}}</td>
       <td><p>{{contact.properties.street}}</p>
-          <p>{{contact.properties.city}}, {{contact.properties.state}}, {{contact.properties.zip}}</p></td>
+          <p>{{contact.properties.city}} {{contact.properties.state}} {{contact.properties.zip}}</p></td>
           <td>{{contact.properties.phone}}</td>
       <td>{{contact.properties.email}}</td>
       <td>{{contact.properties.list}}</td>
       <td>{{contact.properties.comment}}</td>
-      <td>{{contact.properties.date}}</td>
+      <td>{{contact.properties.comm_date | date:'MM/dd/yyyy'}}</td>
       <!-- <td>{{contact.map}}</td> -->
       <!-- <td><input ng-click="deleteEmployee($index)" type="submit" value="Delete Employee"/></td> -->
     </tr>
   </table>
   <div class="buttons">
     <button class="btn btn-primary" onclick="location.href='#home'">Switch to Map View</button>
+    <a class="admin" href="#admin-view">Log out</a>
   </div>
-  <footer>
-    <a href="#admin-view">Log out</a>
-  </footer>
 </div>

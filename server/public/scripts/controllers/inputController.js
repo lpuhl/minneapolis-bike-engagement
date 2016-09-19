@@ -3,6 +3,8 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
 
   $scope.dataFactory = DataFactory;
 
+  $scope.states = ["MN", "IA", "ND", "SD", "WI", "MB", "ON"];
+
   $scope.cancelForm = function () {
     $uibModalInstance.dismiss();
   };
@@ -29,7 +31,7 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
       $uibModalInstance.close();
       openThankYou();
       /// run factory function that will remove drawnItems layer from map and reset it
-      
+
 
   }
 
