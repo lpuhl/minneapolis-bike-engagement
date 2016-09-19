@@ -35,7 +35,6 @@ body {
 
 main {
   margin-top: 20px;
-
 }
 
 .content {
@@ -45,16 +44,28 @@ main {
 header {
   background-color: yellowgreen;
 }
-.admin {
-  float:right;
-}
 
-h1 {
+header h1 {
+  position: relative;
   font-size: 3.5em;
   color: white;
   margin: 0 .5em .5em 1em;
   padding: .5em;
 }
+
+#bike {
+  height: 11.5em;
+  float:right;
+  padding: 0 2em 3em 0;
+
+  margin-top: 0;
+}
+
+
+.admin {
+  float:right;
+}
+
 
 h2 {
   font-size: 2em;
@@ -68,13 +79,12 @@ h3 {
   padding: .5em .5em .5em .25em;
 }
 
+textarea {
+  height: 50px;
+}
 
 a {
   text-decoration: none;
-}
-
-img {
-  width: 50%;
 }
 
 footer {
@@ -100,5 +110,10 @@ footer {
 
 .optional-info {
   font-style: italic;
-  padding-bottom: : 1em;
+  font-size: 1.25em;
+  margin-bottom: : 2em;
+}
+
+.statezip {
+  padding: top: .5em;
 }

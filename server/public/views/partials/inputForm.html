@@ -5,35 +5,40 @@
       <span aria-hidden="true">&times;</span>
     </button>
     <h3 class="modal-title" id="myModalLabel">Tell us what you think!</h4>
+    <textarea width="100%" ng-model="comment" type="text" id="comment" name="comment" placeholder="Your comments here" class="form-control" ></textarea>
+
   </div>
   <div class="modal-body">
-        <h4 class="optional-info">Optional</h4>
-        <textarea width="100%" ng-model="comment" type="text" id="comment" name="comment" placeholder="Your comments here!"></textarea>
+        <h4 class="optional-info">Optional Information</h4>
         <p><label for="first_name">First Name</label>
-        <input ng-model="first_name" type="text" id="first_name" name="first_name" />
+        <input ng-model="first_name" type="text" id="first_name" name="first_name" class="form-control" />
 
         <label for="last_name">Last Name</label>
-        <input ng-model="last_name" type="text" id="last_name" name="last_name" /></p>
+        <input ng-model="last_name" type="text" id="last_name" name="last_name" class="form-control" /></p>
 
         <p><label for="address">Address</label>
-        <input ng-model="address" type="text" id="address" name="address" /></p>
+        <input ng-model="address" type="text" id="address" name="address" class="form-control" /></p>
 
-        <p><label for="city">City</label>
-        <input ng-model="city" type="text" id="city" name="city" />
+        <label for="city">City</label>
+        <input ng-model="city" type="text" id="city" name="city" class="form-control" />
 
-        <select ng-model="state">
+        <div class="statezip">
+
+        <select ng-model="state" >
+          <!-- <option value="MN" ng-selected="true">MN</option> -->
           <option ng-repeat="state in states" type="button" id="state" name="state" value="{{state}}">{{state}}
           </option>
         </select>
 
         <label for="zip">Zip</label>
-        <input ng-model="zip" type="text" id="zip" name="zip" /></p>
+        <input ng-model="zip" type="text" id="zip" name="zip" />
+      </div>
 
         <p><label for="phone" >Phone</label>
-        <input ng-model="phone" type="text" id="phone" name="phone" placeholder="555-555-5555"/>
+        <input ng-model="phone" type="text" id="phone" name="phone" placeholder="555-555-5555" class="form-control" />
 
         <label for="email">email</label>
-        <input ng-model="email" type="email" id="email" name="email" />
+        <input ng-model="email" type="email" id="email" name="email" class="form-control" />
         </p>
 
         <label for="list">Yes, please keep me in the loop!</label>

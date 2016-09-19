@@ -4,6 +4,7 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
   $scope.dataFactory = DataFactory;
 
   $scope.states = ["MN", "IA", "ND", "SD", "WI", "MB", "ON"];
+  $scope.selectedOption = $scope.states[0];
 
   $scope.cancelForm = function () {
     $uibModalInstance.dismiss();

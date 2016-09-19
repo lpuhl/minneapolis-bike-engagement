@@ -16,7 +16,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       minneapolis: {
         lat: 44.9766,
         lng: -93.2655,
-        zoom: 12
+        zoom: 14
       },
       layers: {
         baselayers: {
@@ -65,7 +65,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
         },
         edit: {
         featureGroup: drawnItems,
-        remove: true
+        remove: false
         }
       }
     }
