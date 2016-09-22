@@ -10,8 +10,7 @@ router.post('/', function(req, res) {
   var record = req.body;
   console.log(record);
 
-  var cartoUser = new CartoDB.SQL({'
-  '});
+  var cartoUser = new CartoDB.SQL({'user':});
 
   var sql = "SELECT "+ 'insert_crowd_mapping_data' +"(";
   sql += "'" + record.geometry + "'";
