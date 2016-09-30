@@ -1,16 +1,5 @@
-To Do:
+Minneapolis-centered community engagement app for a bike advocacy group or city planning department. Built with Angular and Leaflet, using the CARTO SQL API for data storage.
 
-__Leaflet Tutorials__
-http://leafletjs.com/examples.html
+Inspired by http://maps.graphicarto.com/twincityhoods/ (Mike Foster) and with many hat tips to https://github.com/radumas/crowdmap-basic. 
 
-__Leaflet Draw__
-https://github.com/Leaflet/Leaflet.draw
-
-__Leaflet with PostGIS, NodeJS, and Express__
-http://duspviz.mit.edu/web-map-workshop/leaflet_nodejs_postgis/
-
-__Mapbox GL JS fundamentals__
-https://www.mapbox.com/help/mapbox-gl-js-fundamentals/
-
-__Build a store locator using Mapbox GL JS__
-https://www.mapbox.com/help/building-a-store-locator/
+_Still a work in progress._
