@@ -42,6 +42,8 @@ myApp.controller("adminController", ["$scope", "$http", "DataFactory", function(
           if (contact.properties.comment == 'undefined') {
             contact.properties.comment = "";
           };
+          contact.properties.list = Boolean(contact.properties.list);
+          console.log(contact.properties.list);
 
       });
 
