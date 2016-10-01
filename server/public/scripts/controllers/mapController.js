@@ -1,6 +1,5 @@
 
 // 'use strict';
-// var CartoDB = require('cartodb');
 
 myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leafletData', '$uibModal', 'DataFactory', function ($scope, $http, leafletDrawEvents, leafletData, $uibModal, DataFactory){
   console.log("map controller working!");

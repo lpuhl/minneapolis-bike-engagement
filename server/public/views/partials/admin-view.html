@@ -23,7 +23,8 @@
           <p>{{contact.properties.city}} {{contact.properties.state}} {{contact.properties.zip}}</p></td>
           <td>{{contact.properties.phone}}</td>
       <td>{{contact.properties.email}}</td>
-      <td>{{contact.properties.list}}</td>
+      <td><input type=checkbox ng-model="contact.properties.list"></input></td>
+      <!-- <td>{{contact.properties.list}}</td> -->
       <td>{{contact.properties.comment}}</td>
       <td>{{contact.properties.comm_date | date:'MM/dd/yyyy'}}</td>
       <!-- <td>{{contact.map}}</td> -->
@@ -32,6 +33,8 @@
   </table>
   <div class="buttons">
     <button class="btn btn-primary" onclick="location.href='#home'">Switch to Map View</button>
+    <button class="btn " onclick="createEmail()">Generate Email List</button>
+
     <a class="admin" href="#admin-view">Log out</a>
   </div>
 </div>
