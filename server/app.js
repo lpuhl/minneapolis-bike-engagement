@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var dotenv = require('dotenv');
+dotenv.load();
 
 /** ---------- OUR MODULES ---------- **/
 var newComment = require('./routes/newcomment');

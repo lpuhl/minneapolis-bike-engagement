@@ -20,6 +20,7 @@
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "cartodb": "^0.5.1",
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "leaflet-draw": "^0.3.2",
     "pg": "^6.1.0",
