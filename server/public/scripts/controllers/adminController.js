@@ -7,9 +7,17 @@ myApp.controller("adminController", ["$scope", "$http", "DataFactory", function(
 
   function getFeaturesFromDB() {
     $scope.dataFactory.getFeaturesFromDB().then(function() {
-      $scope.dbFeatures = $scope.dataFactory.getDataFromDB();
-      $scope.contacts = $scope.dbFeatures;
+      $scope.contacts = $scope.dataFactory.getDataFromDB();
       console.log('contacts: ', $scope.contacts);
+
+      // doesn't work
+      // for (var property in $scope.contacts.properties) {
+      //   console.log($scope.contacts.properties[property]);
+      //   if ($scope.contacts.properties[property] == 'undefined') {
+      //     $scope.contacts.properties[property] = "";
+      //   };
+      // }
+
       $scope.contacts.forEach(function(contact) {
           console.log(contact);
           if (contact.properties.firstname == 'undefined') {
