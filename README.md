@@ -2,4 +2,4 @@ Minneapolis-centered community engagement app for a bike advocacy group or city 
 
 Inspired by http://maps.graphicarto.com/twincityhoods/ (Mike Foster) and with many hat tips to https://github.com/radumas/crowdmap-basic. 
 
-_Still a work in progress._
+_A work in progress._
