@@ -5,6 +5,12 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
   console.log("map controller working!");
   $scope.dataFactory = DataFactory;
 
+  $uibModal.open({
+    templateUrl: '/views/partials/greeting.html',
+    controller: 'GreetingController',
+    windowClass: 'app-modal-window'
+  });
+
   // Initialise the FeatureGroup to store drawn layers
   var drawnItems = new L.FeatureGroup();
   var featuresFromDB = null;
