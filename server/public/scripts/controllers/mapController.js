@@ -50,6 +50,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
         }
       },
       defaults: {
+          scrollWheelZoom: false,
           minZoom: 12,
           path: {
               weight: 10,
