@@ -184,14 +184,6 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
     });
   };
 
-  // setInterval(function() {
-  //   var drawingStatus = $scope.dataFactory.getDrawingStatus();
-  //   if (drawingStatus == true) {
-  //     console.log(drawingStatus);
-  //     drawnItems.clearLayers();
-  //   }
-  // }, 2000);
-
 
 // End controller
 }]);
