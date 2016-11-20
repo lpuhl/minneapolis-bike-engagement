@@ -68,12 +68,11 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
           rectangle: false,
           circle: false,
           marker: true
+        },
+        edit: {
+        featureGroup: drawnItems,
+        remove: false
         }
-        // ,
-        // edit: {
-        // featureGroup: drawnItems,
-        // remove: false
-        // }
       }
     }
   });

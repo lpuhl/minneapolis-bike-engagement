@@ -29,7 +29,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
           console.log("error posting new comment");
         }
       });
-    drawingStatus = true;
+    // drawingStatus = true;
   };
 
   var baseURL = 'https://lizzz.carto.com/api/v2/sql?format=GeoJSON&q=';
