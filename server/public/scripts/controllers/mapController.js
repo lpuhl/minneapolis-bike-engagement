@@ -61,14 +61,24 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       drawOptions: {
         position: "bottomright",
         draw: {
+// Why doesn't the "toolbar" block work?
+          // toolbar: {
+          //   buttons: {
+          //     polyline: 'Draw a line'
+          //   }
+          // },
           polyline: {
-            metric: false
+            metric: false,
+            // tooltip: {
+            //   start: 'Click to start drawing a line.'
+            // }
           },
           polygon: false,
           rectangle: false,
           circle: false,
           marker: true
-        },
+        }
+      ,
         edit: {
         featureGroup: drawnItems,
         remove: false

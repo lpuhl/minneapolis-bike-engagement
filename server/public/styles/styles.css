@@ -117,3 +117,7 @@ footer {
 .statezip {
   padding: top: .5em;
 }
+
+.leaflet-popup-content {
+  font-size: 1.5em;
+}
