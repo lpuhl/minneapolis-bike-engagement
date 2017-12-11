@@ -1,5 +1,4 @@
 myApp.controller('ThanksController', ['$scope', '$http', '$uibModal', '$uibModalInstance', 'DataFactory', function ($scope, $http, $uibModal, $uibModalInstance, DataFactory) {
-  console.log("thanks controller working!");
 
   $scope.dataFactory = DataFactory;
 

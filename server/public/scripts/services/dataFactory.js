@@ -1,5 +1,4 @@
 myApp.factory('DataFactory', ['$http', function($http) {
-  console.log("data factory running");
 
   var newFeature;
   var dbFeatures = {};
@@ -9,6 +8,10 @@ myApp.factory('DataFactory', ['$http', function($http) {
     console.log('intakeDrawnItem function running');
     newFeature = item;
     console.log('new feature in factory: ', newFeature);
+  };
+
+  var removeDrawing = function() {
+    console.log('newFeature', newFeature);
   };
 
   var saveNewRecord = function(newComment) {
@@ -80,6 +83,9 @@ myApp.factory('DataFactory', ['$http', function($http) {
     },
     getDataFromDB: function() {
       return sendDBFeatures();
+    },
+    removeDrawing: function() {
+      return removeDrawing();
     }
     // getDrawingStatus: function() {
     //   return drawingStatus;

@@ -2,7 +2,6 @@
 // 'use strict';
 
 myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leafletData', '$uibModal', 'DataFactory', function ($scope, $http, leafletDrawEvents, leafletData, $uibModal, DataFactory){
-  console.log("map controller working!");
   $scope.dataFactory = DataFactory;
 
   $uibModal.open({
@@ -68,7 +67,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
           //   }
           // },
           polyline: {
-            metric: false,
+            metric: false
             // tooltip: {
             //   start: 'Click to start drawing a line.'
             // }
@@ -96,7 +95,6 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       // console.log("drawnItems: ", drawnItems);
       var drawing = JSON.stringify(drawnItems.toGeoJSON().features[0]['geometry']);
       console.log("Drawing: ", drawing);
-
       $scope.dataFactory.saveDrawnItem(drawing);
 
       $uibModal.open({
@@ -107,9 +105,10 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
     },
     edited: function(arg) {},
     deleted: function(arg) {
+      console.log('arg', arg);
       var layers;
       layers = arg.layers;
-      drawnItems.removeLayer(layer);
+      drawnItems.removeLayer(layers);
     },
     drawstart: function(arg) {},
     drawstop: function(arg) {
@@ -121,7 +120,8 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
     deletestop: function(arg) {}
   };
 
-  var drawEvents = leafletDrawEvents.getAvailableEvents();
+  var drawEvents = leafletDrawEvents.getAvailableEvents(); //array
+  // console.log('drawEvents', drawEvents);
 
   drawEvents.forEach(function(eventName){
       $scope.$on('leafletDirectiveDraw.' + eventName, function(e, payload) {
@@ -152,7 +152,7 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
 
   $scope.hideGeoJSON = function() {
     leafletData.getMap().then(function (map) {
-      console.log("getMap running");
+    //  console.log("getMap running");
         leafletData.getGeoJSON().then(function (geoJSON) {
             map.removeLayer(geoJSON);
             drawnItems.clearLayers();

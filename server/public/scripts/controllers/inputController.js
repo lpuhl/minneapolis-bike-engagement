@@ -1,5 +1,4 @@
 myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalInstance', 'DataFactory', function ($scope, $http, $uibModal, $uibModalInstance, DataFactory) {
-  console.log("input controller working!");
 
   $scope.dataFactory = DataFactory;
 
@@ -7,6 +6,8 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
   $scope.selectedOption = $scope.states[0];
 
   $scope.cancelForm = function () {
+    console.log('cancelForm');
+    $scope.dataFactory.removeDrawing();
     $uibModalInstance.dismiss();
   };
 
@@ -26,6 +27,7 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
           list: $scope.list
       };
       $scope.dataFactory.saveNewComment(newComment);
+
       // var test = $scope.dataFactory.getDrawnItem();
 
       // close modal window

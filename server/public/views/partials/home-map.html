@@ -1,12 +1,28 @@
+
+<div class="container-fluid">
+
 <!-- Map -->
-<leaflet defaults="map.defaults" layers="map.layers" lf-center="map.minneapolis" height="600px" width="1000px" lf-draw="map.drawOptions" geojson="geojson" markers="markers"></leaflet>
-<div width="1000px" class="buttons">
-  <button class="btn btn-primary" ng-click="getFeaturesFromDB()">See Comments</button>
-  <button class="btn btn-primary" ng-click="hideGeoJSON();" >Clear Comments</button>
-  <a class="admin" href="#admin-view">Admin login</a>
+<div class="row">
+  <div class="col-sm-12">
+    <leaflet class="center-block" defaults="map.defaults" layers="map.layers" lf-center="map.minneapolis" height="95vh" width="95vw" lf-draw="map.drawOptions" geojson="geojson" markers="markers"></leaflet>
+  </div>
 </div>
-<footer>
-</footer>
+<div class="row">
+  <div class="col-sm-12 btn-column">
+
+    <div class="buttons">
+    <button class="btn btn-primary" ng-click="getFeaturesFromDB()">See Comments</button>
+    <button class="btn btn-primary" ng-click="hideGeoJSON();" >Clear Comments</button>
+    <a class="admin" href="#admin-view">Admin login</a>
+  </div>
+  </div>
+
+  <footer>
+  </footer>
+</div>
+</div>
+
+
 
 
 
