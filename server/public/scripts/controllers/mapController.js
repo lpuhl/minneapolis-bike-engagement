@@ -95,12 +95,16 @@ myApp.controller('mapController', ['$scope', '$http', 'leafletDrawEvents', 'leaf
       // console.log("drawnItems: ", drawnItems);
       var drawing = JSON.stringify(drawnItems.toGeoJSON().features[0]['geometry']);
       console.log("Drawing: ", drawing);
-      $scope.dataFactory.saveDrawnItem(drawing);
+      $scope.dataFactory.intakeDrawnItem(drawing);
 
       $uibModal.open({
         templateUrl: '/views/partials/inputForm.html',
         controller: 'InputController',
         windowClass: 'app-modal-window'
+      }).result.then(function(cancel){
+        if (cancel) {
+          drawnItems.removeLayer(leafletEvent.layer);
+        }
       });
     },
     edited: function(arg) {},

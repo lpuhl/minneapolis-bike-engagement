@@ -10,10 +10,6 @@ myApp.factory('DataFactory', ['$http', function($http) {
     console.log('new feature in factory: ', newFeature);
   };
 
-  var removeDrawing = function() {
-    console.log('newFeature', newFeature);
-  };
-
   var saveNewRecord = function(newComment) {
     // drawingStatus = undefined;
     console.log('newComment in saveNewRecord function: ', newComment);
@@ -70,7 +66,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
 
   return {
 
-    saveDrawnItem: function(drawing) {
+    intakeDrawnItem: function(drawing) {
       // console.log('saveDrawnItem running from factory:');
       return intakeDrawnItem(drawing);
     },
@@ -83,10 +79,8 @@ myApp.factory('DataFactory', ['$http', function($http) {
     },
     getDataFromDB: function() {
       return sendDBFeatures();
-    },
-    removeDrawing: function() {
-      return removeDrawing();
     }
+    // ,
     // getDrawingStatus: function() {
     //   return drawingStatus;
     // }

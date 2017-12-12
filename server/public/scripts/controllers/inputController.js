@@ -7,8 +7,7 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
 
   $scope.cancelForm = function () {
     console.log('cancelForm');
-    $scope.dataFactory.removeDrawing();
-    $uibModalInstance.dismiss();
+    $uibModalInstance.close('cancel');
   };
 
   // Saving new input from form and geometry
@@ -33,8 +32,6 @@ myApp.controller("InputController", ['$scope', '$http', '$uibModal', '$uibModalI
       // close modal window
       $uibModalInstance.close();
       openThankYou();
-      /// run factory function that will remove drawnItems layer from map and reset it
-
 
   }
 
