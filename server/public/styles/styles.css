@@ -87,8 +87,9 @@ h3 {
   padding: .5em .5em .5em .25em;
 }
 
-textarea {
-  height: 50px;
+textarea.comment {
+  height: 120px;
+  font-size: 16px;
 }
 
 a {
@@ -117,13 +118,28 @@ footer {
 }
 
 .optional-info {
+  font-weight: bold;
   font-style: italic;
-  font-size: 1.25em;
-  margin-bottom: : 2em;
+  font-size: 1em;
+  margin-bottom: .5em;
+}
+
+label {
+  font-weight: normal;
+  font-size: .9em;
+  margin-top: 0.5em;
 }
 
 .statezip {
-  padding: top: .5em;
+  padding-top: .5em;
+}
+
+.state-dropdown {
+  margin-right: .5em;
+}
+
+.modal-footer.input-form {
+  padding: 15px 15px 0 0;
 }
 
 .leaflet-popup-content {
